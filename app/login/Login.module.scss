@@ -1,0 +1,31 @@
+.heroArea {
+  min-height: 600px;
+  position: relative;
+  background-image: url('../public/images/login-register-suitcase.jpeg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 75%;
+
+  .h1 {
+    font-size: 2rem;
+    line-height: 5;
+  }
+
+  .h1,
+  .h3 {
+    color: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150%;
+    margin: 0;
+  }
+  .contentWrapper {
+    background-color: black;
+    color: azure;
+    opacity: 50%;
+    display: flex;
+    width: 50%;
+  }
+}

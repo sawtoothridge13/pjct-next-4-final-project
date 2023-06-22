@@ -6,20 +6,49 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "@types/node": "20.3.1",
+    "cloudinary": "^1.37.2",
+    "cloudinary-react": "^1.8.1",
+    "dotenv-safe": "^8.2.0",
+    "ley": "^0.8.1",
     "next": "13.4.5",
+    "postgres": "^3.3.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-scripts": "^5.0.1",
     "sass": "^1.63.4",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "uuid": "^9.0.0"
   },
+  "browser": {
+    "tls": false,
+    "fs": false,
+    "os": false,
+    "path": false,
+    "net": false,
+    "dns": false,
+    "module": false,
+    "async_hooks": false
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
+    "@ts-safeql/eslint-plugin": "^1.1.4",
+    "@types/dotenv-safe": "^8.1.2",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
-    "eslint-config-upleveled": "^4.5.1",
+    "@types/uuid": "^9.0.2",
+    "eslint-config-upleveled": "^4.7.2",
+    "libpg-query": "^15.0.2",
     "stylelint": "^15.7.0",
     "stylelint-config-upleveled": "^1.0.2",
     "typescript": "5.1.3"
