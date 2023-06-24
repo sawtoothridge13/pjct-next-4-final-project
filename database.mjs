@@ -10,3 +10,6 @@ console.log(
 SELECT * FROM users;
 `,
 );
+
+// for testing
+await sql.end();

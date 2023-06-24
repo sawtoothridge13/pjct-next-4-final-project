@@ -1,11 +1,9 @@
 import './globals.scss';
 import { Fira_Code } from 'next/font/google';
 import Image from 'next/image';
-import Link from 'next/link';
-import { type } from 'os';
 import React from 'react';
+import tTlogo from '../public/images/tt-logo.png';
 import styles from './layout.module.scss';
-import tTlogo from './public/images/tt-logo.png';
 
 const inter = Fira_Code({ subsets: ['latin'] });
 
@@ -23,8 +21,8 @@ export default function RootLayout({ children }: Props) {
                 <Image
                   src={tTlogo}
                   alt="trip tracker logo"
-                  width={85}
-                  height={57}
+                  width={170}
+                  height={114}
                 />
               </a>
             </figure>

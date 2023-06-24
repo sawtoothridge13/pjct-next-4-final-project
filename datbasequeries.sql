@@ -1,13 +1,21 @@
-CREATE TABLE (
+-- Create trips table
+
+CREATE TABLE trips(
 id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-first_name varchar(30) NOT NULL,
-password_hash varchar(200) NOT NULL,
+ name varchar(30) NOT NULL,
+ user_id(30) NOT NULL,
+ is_private boolean
 )
 
+-- Insert into trips
 
-CREATE TABLE animals (
-id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-first_name varchar(30) NOT NULL,
-type varchar(30) NOT NULL,
-accessory varchar(40)
-);
+INSERT INTO users
+(name, user_id, is_private)
+VALUES
+('Jim', 'Abbot', 'Angels'),
+('George', 'Brett', 'Cardinals'),
+('Bo', 'Jackson', 'Royals');
+
+-- Read Users
+
+SELECT * FROM users;
