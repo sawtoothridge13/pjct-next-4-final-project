@@ -10,7 +10,7 @@ type Error = {
   error: string;
 };
 
-type LoginResponseBodyPost =
+export type LoginResponseBodyPost =
   | {
       user: User;
     }

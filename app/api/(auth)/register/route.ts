@@ -11,7 +11,7 @@ type Error = {
   error: string;
 };
 
-type RegisterResponseBodyPost =
+export type RegisterResponseBodyPost =
   | {
       user: User;
     }

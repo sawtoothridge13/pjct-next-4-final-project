@@ -8,7 +8,7 @@ export const metadata = {
     'Login page for TripTracker an all-in one site to view and track travel journeys.',
 };
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return <LoginForm />;
 }
 
