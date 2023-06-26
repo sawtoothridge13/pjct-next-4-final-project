@@ -22,13 +22,13 @@ export default function RegisterForm() {
 
     if ('error' in data) {
       setError(data.error);
+      return;
     }
-    if ('user' in data) {
-      console.log(data.user);
-      router.push(`/profile/${data.user.username}`);
-      // we may have a revalidate path here in the future
-      router.refresh();
-    }
+
+    console.log(data.user);
+    router.push(`/profile/${data.user.username}`);
+    // we may have in the future revalidatePath()
+    router.refresh();
   }
 
   return (
@@ -43,8 +43,8 @@ export default function RegisterForm() {
       <label>
         password:
         <input
-          value={password}
           type="password"
+          value={password}
           onChange={(event) => setPassword(event.currentTarget.value)}
         />
       </label>

@@ -3,17 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
+import { getSafeReturnToPath } from '../../util/validation';
 import styles from './LoginForm.module.scss';
 
 type Props = { returnTo?: string };
 
-export default function LoginForm({ returnTo }: Props) {
+export default function LoginForm(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-
-  console.log(returnTo);
 
   async function login() {
     const response = await fetch('/api/login', {
@@ -25,20 +24,15 @@ export default function LoginForm({ returnTo }: Props) {
 
     if ('error' in data) {
       setError(data.error);
+      console.log(data.error);
+      return;
     }
 
-    if ('user' in data) {
-      // if the url contains a returnTo query param I want to redirect there instead
-
-      if (returnTo) {
-        router.push(returnTo);
-        return;
-      }
-      console.log(data.user);
-      router.push(`/profile/${data.user.username}`);
-      // we may have a revalidate path here in the future
-      router.refresh();
-    }
+    router.push(
+      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
+    );
+    // we may have in the future revalidatePath()
+    router.refresh();
   }
 
   return (

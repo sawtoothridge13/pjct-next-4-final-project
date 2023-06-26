@@ -1,15 +1,9 @@
 import { cache } from 'react';
+import { User } from '../migrations/1687761074-createTableUsers';
 import { sql } from './connect';
 
-type UserWithPasswordHash = {
-  id: number;
-  username: string;
+type UserWithPasswordHash = User & {
   passwordHash: string;
-};
-
-export type User = {
-  id: number;
-  username: string;
 };
 
 export const getUserWithPasswordHashByUsername = cache(
