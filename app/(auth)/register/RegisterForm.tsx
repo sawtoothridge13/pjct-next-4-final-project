@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
 import styles from './RegisterForm.module.scss';
@@ -8,6 +9,8 @@ export default function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
+  0;
 
   async function register() {
     const response = await fetch('/api/register', {
@@ -22,6 +25,9 @@ export default function RegisterForm() {
     }
     if ('user' in data) {
       console.log(data.user);
+      router.push(`/profile/${data.user.username}`);
+      // we may have a revalidate path here in the future
+      router.refresh();
     }
   }
 

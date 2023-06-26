@@ -8,8 +8,11 @@ export const metadata = {
     'Login page for TripTracker an all-in one site to view and track travel journeys.',
 };
 
-export default function RegisterPage() {
-  return <LoginForm />;
+type Props = { searchParams: { returnTo?: string | string[] } };
+
+export default function LoginPage({ searchParams }: Props) {
+  console.log('My search params', searchParams);
+  return <LoginForm returnTo={searchParams.returnTo} />;
 }
 
 // export default function LoginPage() {
