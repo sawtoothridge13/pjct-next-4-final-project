@@ -1,5 +1,7 @@
 // import styles from './Login.module.scss';
 
+import LoginForm from './LoginForm';
+
 export const metadata = {
   title: `TripTracker | Login`,
   description:
@@ -7,7 +9,7 @@ export const metadata = {
 };
 
 export default function LoginPage() {
-  return 'login page';
+  return <LoginForm />;
 }
 
 // export default function LoginPage() {

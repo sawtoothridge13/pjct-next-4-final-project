@@ -2,8 +2,7 @@ import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
-  createUser,
-  getUserByUsername,
+  getUserWithPasswordHashByUsername,
   User,
 } from '../../../../database/users';
 
@@ -11,7 +10,7 @@ type Error = {
   error: string;
 };
 
-type RegisterResponseBodyPost =
+type LoginResponseBodyPost =
   | {
       user: User;
     }
@@ -24,7 +23,7 @@ const userSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<RegisterResponseBodyPost>> {
+): Promise<NextResponse<LoginResponseBodyPost>> {
   const body = await request.json();
 
   // 1. get the credentials from the body
@@ -42,38 +41,40 @@ export async function POST(
     );
   }
 
-  console.log('query', await getUserByUsername(result.data.username));
+  // 3. Verify the user credentials
+  const userWithPasswordHash = await getUserWithPasswordHashByUsername(
+    result.data.username,
+  );
 
-  if (await getUserByUsername(result.data.username)) {
+  if (!userWithPasswordHash) {
     // zod send you details about the error
     // console.log(result.error);
     return NextResponse.json(
       {
-        error: 'username is already used',
+        error: 'user or password not valid',
       },
-      { status: 406 },
+      { status: 401 },
     );
   }
   // 3. hash the password
-  const passwordHash = await bcrypt.hash(result.data.password, 10);
+  const isPasswordValid = await bcrypt.compare(
+    result.data.password,
+    userWithPasswordHash.passwordHash,
+  );
 
-  // 4. store the credentials in the db
-  const newUser = await createUser(result.data.username, passwordHash);
-  // 5 create a session token
-  // 6. create a cookie with session token
-
-  if (!newUser) {
-    // zod send you details about the error
-    // console.log(result.error);
+  if (!isPasswordValid) {
     return NextResponse.json(
       {
-        error: 'Error creating new user',
+        error: 'user or password not valid',
       },
-      { status: 500 },
+      { status: 401 },
     );
   }
 
-  // 7. return the new user to the client
-
-  return NextResponse.json({ user: newUser });
+  return NextResponse.json({
+    user: {
+      username: userWithPasswordHash.username,
+      id: userWithPasswordHash.id,
+    },
+  });
 }
