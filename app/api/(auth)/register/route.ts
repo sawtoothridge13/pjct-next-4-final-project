@@ -1,11 +1,15 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createSession } from '../../../../database/sessions';
 import {
   createUser,
   getUserByUsername,
   User,
 } from '../../../../database/users';
+import { secureCookieOptions } from '../../../../util/cookies';
 
 type Error = {
   error: string;
@@ -42,8 +46,6 @@ export async function POST(
     );
   }
 
-  console.log('query', await getUserByUsername(result.data.username));
-
   if (await getUserByUsername(result.data.username)) {
     // zod send you details about the error
     // console.log(result.error);
@@ -54,26 +56,48 @@ export async function POST(
       { status: 406 },
     );
   }
+
   // 3. hash the password
   const passwordHash = await bcrypt.hash(result.data.password, 10);
 
   // 4. store the credentials in the db
   const newUser = await createUser(result.data.username, passwordHash);
-  // 5 create a session token
-  // 6. create a cookie with session token
 
   if (!newUser) {
     // zod send you details about the error
     // console.log(result.error);
     return NextResponse.json(
       {
-        error: 'Error creating new user',
+        error: 'Error creating the new user',
       },
       { status: 500 },
     );
   }
 
-  // 7. return the new user to the client
+  // We are sure the user is authenticated
 
+  // 5. Create a token
+  const token = crypto.randomBytes(100).toString('base64');
+  // 6. Create the session record
+
+  const session = await createSession(token, newUser.id);
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'Error creating the new session',
+      },
+      { status: 500 },
+    );
+  }
+
+  // 7. Send the new cookie in the headers
+  cookies().set({
+    name: 'sessionToken',
+    value: session.token,
+    ...secureCookieOptions,
+  });
+
+  // 7. return the new user to the client
   return NextResponse.json({ user: newUser });
 }

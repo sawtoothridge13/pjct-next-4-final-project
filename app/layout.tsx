@@ -1,9 +1,11 @@
 import './globals.scss';
 import { Fira_Code } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import tTlogo from '../public/images/tt-logo.png';
 import styles from './layout.module.scss';
+import { LogoutButton } from './LogoutButton';
 
 const inter = Fira_Code({ subsets: ['latin'] });
 
@@ -37,13 +39,21 @@ export default function RootLayout({ children }: Props) {
                     <a href="/about">About</a>
                   </li>
                   <li>
-                    <a href="contact">Contact</a>
+                    <a href="/contact">Contact</a>
+                  </li>
+                  <li>
+                    <Link href="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link href="/register">Register</Link>
                   </li>
                 </ul>
+
                 <div className={styles.headerButtonsContainer}>
                   <button className={styles.button}>login</button>
                   <button className={styles.button}>register</button>
                 </div>
+                <LogoutButton />
               </nav>
             </div>
             <div className={styles.divider} />

@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { User } from '../migrations/1687761074-createTableUsers';
+import { User } from '../migrations/1687761074-createUsers';
 import { sql } from './connect';
 
 type UserWithPasswordHash = User & {
@@ -9,13 +9,12 @@ type UserWithPasswordHash = User & {
 export const getUserWithPasswordHashByUsername = cache(
   async (username: string) => {
     const [user] = await sql<UserWithPasswordHash[]>`
-    SELECT
-      *
-    FROM
+    SELECT * FROM
       users
     WHERE
       users.username = ${username.toLowerCase()}
  `;
+
     return user;
   },
 );
@@ -30,6 +29,7 @@ export const getUserByUsername = cache(async (username: string) => {
     WHERE
       users.username = ${username.toLowerCase()}
  `;
+
   return user;
 });
 
@@ -49,3 +49,39 @@ export const createUser = cache(
     return user;
   },
 );
+
+export const getUserBySessionToken = cache(async (token: string) => {
+  const [user] = await sql<User[]>`
+  SELECT
+    users.id,
+    users.username
+  FROM
+    users
+  INNER JOIN
+    sessions ON (
+      sessions.token = ${token} AND
+      sessions.user_id = users.id AND
+      sessions.expiry_timestamp > now()
+    )
+  `;
+
+  return user;
+});
+
+// export const getUserBySessionToken = cache(async (token: string) => {
+//   const [user] = await sql<User[]>`
+//   SELECT
+//     users.id,
+//     users.username
+//   FROM
+//     users
+//   INNER JOIN
+//     sessions ON (
+//       sessions.token = ${token} AND
+//       sessions.user_id = users.id AND
+//       sessions.expiry_timestamp > now()
+//     )
+//   `;
+
+//   return user;
+// });

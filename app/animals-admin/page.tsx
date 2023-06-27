@@ -1,12 +1,13 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+// import { getAnimals } from '../../database/animals';
 import { getValidSessionByToken } from '../../database/sessions';
 
-export const metadata = {
-  title: `TripTracker | Trips`,
-  description: 'User trips dashboard',
-};
-export default async function TripsPage() {
+// import AnimalsForm from './AnimalsForm';
+
+// **************** COPY 1 - 3 TO ANY PAGE YOU WANT TO RESTRICT!!!!!!! ONLY UPDATE redirect address *********
+
+export default async function AnimalsAdminPage() {
   // 1. Check if the sessionToken cookie exit
   const sessionTokenCookie = cookies().get('sessionToken');
 
@@ -17,10 +18,8 @@ export default async function TripsPage() {
     (await getValidSessionByToken(sessionTokenCookie.value));
 
   // 3. Either redirect or render the login form
-  if (!session) redirect('/login?returnTo=/trips');
-  return (
-    <main>
-      <h1>These are my trips</h1>
-    </main>
-  );
+  if (!session) redirect('/login?returnTo=/animals-admin');
+
+  // const animals = await getAnimals();
+  // return <AnimalsForm animals={animals} />;
 }

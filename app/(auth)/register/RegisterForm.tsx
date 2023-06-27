@@ -10,7 +10,6 @@ export default function RegisterForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-  0;
 
   async function register() {
     const response = await fetch('/api/register', {
