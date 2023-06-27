@@ -7,7 +7,7 @@ import { getValidSessionByToken } from '../../database/sessions';
 
 // **************** COPY 1 - 3 TO ANY PAGE YOU WANT TO RESTRICT!!!!!!! ONLY UPDATE redirect address *********
 
-export default async function AnimalsAdminPage() {
+export default async function AdminPage() {
   // 1. Check if the sessionToken cookie exit
   const sessionTokenCookie = cookies().get('sessionToken');
 
@@ -18,7 +18,7 @@ export default async function AnimalsAdminPage() {
     (await getValidSessionByToken(sessionTokenCookie.value));
 
   // 3. Either redirect or render the login form
-  if (!session) redirect('/login?returnTo=/animals-admin');
+  if (!session) redirect('/login?returnTo=/admin');
 
   // const animals = await getAnimals();
   // return <AnimalsForm animals={animals} />;

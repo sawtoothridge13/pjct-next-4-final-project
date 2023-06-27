@@ -1,8 +1,11 @@
 import './globals.scss';
 import { Fira_Code } from 'next/font/google';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
+import { getUserBySessionToken } from '../database/users';
 import tTlogo from '../public/images/tt-logo.png';
 import styles from './layout.module.scss';
 import { LogoutButton } from './LogoutButton';
@@ -12,7 +15,15 @@ const inter = Fira_Code({ subsets: ['latin'] });
 type Props = {
   children: string;
 };
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+  // 1. get the session token from the cookie
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
   return (
     <html lang="en" className={inter.className}>
       <body>
@@ -41,19 +52,25 @@ export default function RootLayout({ children }: Props) {
                   <li>
                     <a href="/contact">Contact</a>
                   </li>
-                  <li>
-                    <Link href="/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link href="/register">Register</Link>
-                  </li>
                 </ul>
 
-                <div className={styles.headerButtonsContainer}>
+                {user ? (
+                  <>
+                    <div>{user.username}</div>
+                    <LogoutButton />
+                  </>
+                ) : (
+                  <>
+                    <Link href="/register">register</Link>
+                    <Link href="/login">login</Link>
+                  </>
+                )}
+
+                {/* <div className={styles.headerButtonsContainer}>
                   <button className={styles.button}>login</button>
                   <button className={styles.button}>register</button>
                 </div>
-                <LogoutButton />
+                <LogoutButton /> */}
               </nav>
             </div>
             <div className={styles.divider} />
