@@ -6,7 +6,6 @@ import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import { getUserBySessionToken } from '../database/users';
 import tTlogo from '../public/images/tt-logo.png';
-import { logout } from './(auth)/logout/actions';
 import styles from './layout.module.scss';
 import { LogoutButton } from './LogoutButton';
 

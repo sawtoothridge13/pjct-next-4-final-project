@@ -1,0 +1,31 @@
+.heroArea {
+  min-height: 600px;
+  position: relative;
+  background-image: url('../../../public/images/suitcases.jpeg');
+  background-position: fill;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 75%;
+
+  .h1 {
+    font-size: 2rem;
+    line-height: 5;
+  }
+
+  .h1,
+  .h2 {
+    color: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150%;
+    margin: 0;
+  }
+  .contentWrapper {
+    background-color: black;
+    color: azure;
+    opacity: 50%;
+    display: flex;
+    width: 50%;
+  }
+}
