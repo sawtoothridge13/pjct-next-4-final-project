@@ -3,11 +3,14 @@ import { redirect } from 'next/navigation';
 // import { getAnimals } from '../../database/animals';
 import { getValidSessionByToken } from '../../database/sessions';
 
+type Props = {
+  children: React.ReactNode;
+};
 // import AnimalsForm from './AnimalsForm';
 
 // **************** COPY 1 - 3 TO ANY PAGE YOU WANT TO RESTRICT!!!!!!! ONLY UPDATE redirect address *********
 
-export default async function AdminPage() {
+export default async function AdminPage(props: Props) {
   // 1. Check if the sessionToken cookie exit
   const sessionTokenCookie = cookies().get('sessionToken');
 
@@ -21,5 +24,5 @@ export default async function AdminPage() {
   if (!session) redirect('/login?returnTo=/admin');
 
   // const animals = await getAnimals();
-  // return <AnimalsForm animals={animals} />;
+  return <div>{props.children}</div>;
 }

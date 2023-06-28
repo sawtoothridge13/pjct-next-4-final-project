@@ -3,17 +3,17 @@ import { Fira_Code } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { getUserBySessionToken } from '../database/users';
 import tTlogo from '../public/images/tt-logo.png';
+import { logout } from './(auth)/logout/actions';
 import styles from './layout.module.scss';
 import { LogoutButton } from './LogoutButton';
 
 const inter = Fira_Code({ subsets: ['latin'] });
 
 type Props = {
-  children: string;
+  children: ReactNode;
 };
 export default async function RootLayout({ children }: Props) {
   // 1. get the session token from the cookie
@@ -53,7 +53,6 @@ export default async function RootLayout({ children }: Props) {
                     <a href="/contact">Contact</a>
                   </li>
                 </ul>
-
                 {user ? (
                   <>
                     <div>{user.username}</div>
