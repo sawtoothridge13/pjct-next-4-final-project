@@ -12,7 +12,7 @@ export async function up(sql: Sql) {
     CREATE TABLE trips (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(80) NOT NULL UNIQUE,
-      user_id varchar(80) NOT NULL,
+      user_id integer NOT NULL,
       is_private boolean
     )
   `;

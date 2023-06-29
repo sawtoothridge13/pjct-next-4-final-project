@@ -37,7 +37,10 @@ export default function LoginForm(props: Props) {
     router.refresh();
   }
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
+    <form
+      className={styles.loginForm}
+      onSubmit={(event) => event.preventDefault()}
+    >
       <label>
         username:
         <input

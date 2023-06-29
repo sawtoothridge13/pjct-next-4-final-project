@@ -1,12 +1,17 @@
 .heroArea {
   min-height: 600px;
   position: relative;
-  background-image: url('../../../public/images/suitcases.jpeg');
+  background-image: url('../../../public/images/saigon.png');
   background-position: fill;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 75%;
+  opacity: 25%;
 
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .h1 {
     font-size: 2rem;
     line-height: 5;

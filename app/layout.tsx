@@ -30,7 +30,7 @@ export default async function RootLayout({ children }: Props) {
           <header className={styles.header}>
             <div className={styles.contentWrapper}>
               <figure>
-                <a>
+                <a className={styles.logo}>
                   <Image
                     src={tTlogo}
                     alt="trip tracker logo"

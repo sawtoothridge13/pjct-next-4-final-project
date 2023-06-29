@@ -41,3 +41,15 @@
 .error {
   background-color: red;
 }
+
+.loginForm {
+  height: 400px;
+  width: 375px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url('../../../public/images/passport.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

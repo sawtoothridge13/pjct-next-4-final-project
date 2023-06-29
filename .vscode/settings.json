@@ -9,5 +9,12 @@
     "javascript",
     "typescriptreact"
   ],
-  "cSpell.words": ["Anytown", "camelcase", "libpg", "safeql", "Tlogo"]
+  "cSpell.words": [
+    "Anytown",
+    "camelcase",
+    "fieldmap",
+    "libpg",
+    "safeql",
+    "Tlogo"
+  ]
 }

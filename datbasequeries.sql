@@ -9,13 +9,13 @@ id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 
 -- Insert into trips
 
-INSERT INTO users
+INSERT INTO trips
 (name, user_id, is_private)
 VALUES
-('Jim', 'Abbot', 'Angels'),
-('George', 'Brett', 'Cardinals'),
-('Bo', 'Jackson', 'Royals');
+('Vietnam', '1', false),
+('Vienna', '2', true),
+('Sheridan', '2', false);
 
 -- Read Users
 
-SELECT * FROM users;
+SELECT * FROM trips;
