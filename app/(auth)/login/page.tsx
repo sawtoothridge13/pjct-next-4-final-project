@@ -1,8 +1,6 @@
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
-import passport from '../../../public/images/passport.png';
 import LoginForm from './LoginForm';
 import styles from './page.module.scss';
 

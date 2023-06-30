@@ -2,6 +2,8 @@ import { cache } from 'react';
 import { Trip } from '../migrations/1687932835-createTrips';
 import { sql } from './connect';
 
+// functions to query database tables
+
 export const getTrips = cache(async () => {
   const trips = await sql<Trip[]>`
     SELECT * FROM trips
