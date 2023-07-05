@@ -1,19 +1,26 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getTrips } from '../../../database/trips';
 import { getUserByUsername } from '../../../database/users';
 import DropDownMenu from './DropDownMenu';
 import styles from './page.module.scss';
 
 type Props = {
-  params: { username: string };
+  params: {
+    username: string;
+    tripId: number;
+    journalId: number;
+  };
 };
 
 export default async function ProfileUsernamePage({ params }: Props) {
   const user = await getUserByUsername(params.username);
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ];
+  const trips = await getTrips();
+
+  const options = trips.map((trip) => ({
+    value: trip.id.toString(),
+    label: trip.name,
+  }));
 
   if (!user) {
     notFound();
@@ -26,6 +33,15 @@ export default async function ProfileUsernamePage({ params }: Props) {
           <DropDownMenu options={options} />
         </div>
       </section>
+      <div>
+        These are my trips
+        {trips.map((trip) => (
+          <div key={`trip-div-${trip.id}`}>
+            <Link href={`/trips/${trip.id}`}>{trip.name}</Link>
+            <br />
+          </div>
+        ))}
+      </div>
       <section>
         <h2 className={styles.h2}>Journal</h2>
       </section>
@@ -37,7 +53,7 @@ export default async function ProfileUsernamePage({ params }: Props) {
       </section>
 
       <div>
-        <div>id: {user.id}</div>
+        <div>id: {user.id} </div>
         <div>username: {user.username}</div>
         <br />
       </div>

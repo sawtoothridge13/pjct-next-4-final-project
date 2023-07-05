@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import styles from './DropDownMenu.module.scss';
 
@@ -10,9 +11,13 @@ type Option = {
 
 type DropDownMenuProps = {
   options: Option[];
+  onOptionClick: (option: Option) => void;
 };
 
-const DropDownMenu: React.FC<DropDownMenuProps> = ({ options }) => {
+const DropDownMenu: React.FC<DropDownMenuProps> = ({
+  options,
+  onOptionClick,
+}) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,8 +35,9 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ options }) => {
     };
   }, []);
 
-  const handleOptionClick = (option: Option) => {
+  const handleClick = (option: Option) => {
     setSelectedOption(option);
+    onOptionClick(option); // Call onOptionClick instead of handleOptionClick
     setIsOpen(false);
   };
 
@@ -56,19 +62,19 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ options }) => {
       {isOpen && (
         <ul>
           {options.map((option) => (
-            <li
-              key={`option-${option.value}`}
-              className={styles.dropdownItem}
-              onClick={() => handleOptionClick(option)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  handleOptionClick(option);
-                }
-              }}
-              tabIndex={0}
-              role="button"
-            >
-              {option.label}
+            <li key={`option-${option.value}`} className={styles.dropdownItem}>
+              <a
+                href={`/trips/${option.value}`}
+                onClick={() => handleClick(option)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    handleClick(option);
+                  }
+                }}
+                tabIndex={0}
+              >
+                {option.label}
+              </a>
             </li>
           ))}
         </ul>

@@ -5,7 +5,6 @@
   background-position: fill;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 25%;
 
   .section {
     display: flex;
@@ -18,8 +17,9 @@
   }
 
   .h1,
-  .h2 {
-    color: azure;
+  .h2,
+  .h3 {
+    color: rgb(7, 7, 7);
     display: flex;
     justify-content: center;
     align-items: center;

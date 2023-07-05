@@ -6,8 +6,7 @@ export const animalNotFoundMetadata = {
 export default function TripNotFound() {
   return (
     <div>
-      Sorry this page was not found make sure you visit an animal page that
-      exists
+      Sorry this page was not found make sure you visit an trip page that exists
     </div>
   );
 }

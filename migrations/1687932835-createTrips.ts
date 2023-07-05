@@ -4,7 +4,7 @@ export type Trip = {
   id: number;
   name: string;
   userId: number;
-  isPrivate: boolean;
+  isPrivate: boolean | null;
 };
 
 export async function up(sql: Sql) {

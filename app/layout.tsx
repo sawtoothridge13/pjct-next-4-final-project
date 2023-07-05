@@ -29,8 +29,8 @@ export default async function RootLayout({ children }: Props) {
         <main>
           <header className={styles.header}>
             <div className={styles.contentWrapper}>
-              <figure>
-                <a className={styles.logo}>
+              <figure className={styles.figure}>
+                <a>
                   <Image
                     src={tTlogo}
                     alt="trip tracker logo"
@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: Props) {
                   />
                 </a>
               </figure>
-
+              <div className={styles.divider} />
               <nav className={`${styles.container} ${styles.nav}`}>
                 <ul className={styles.ul}>
                   <li>
@@ -74,6 +74,7 @@ export default async function RootLayout({ children }: Props) {
             <div className={styles.divider} />
           </header>
           {children}
+          <div className={styles.divider} />
           <footer className={styles.footer}>
             <div className={styles.contentWrapper}>
               <div className={styles.footerContent}>

@@ -14,7 +14,7 @@ export const mediaFiles = [
   {
     id: 3,
     journalId: 3,
-    url: 'https://res.cloudinary.com/djy3fdeij/image/upload/v1688124808/triptracker/Vietnam/IMG_0202_z3hjts.jpg',
+    url: 'https://res.cloudinary.com/djy3fdeij/image/upload/v1688124555/triptracker/Vienna/A9340436-8765-43BA-B84F-D35DE078123F_1_105_c_grohyn.jpg',
   },
 ];
 

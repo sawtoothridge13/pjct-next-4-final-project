@@ -1,25 +1,40 @@
-import Link from 'next/link';
-import { getTrips } from '../../../database/trips';
+import { notFound } from 'next/navigation';
+import { getJournalById } from '../../../database/journals';
+import { getMapById } from '../../../database/maps';
+import { getMediaFileById } from '../../../database/mediaFiles';
+import { getTripById } from '../../../database/trips';
 
 export const metadata = {
-  title: 'Trips page',
-  description: 'My Trips',
+  title: 'Trip Page',
+  description: 'My Trip',
 };
 
-export default async function TripsPage() {
-  const trips = await getTrips();
+type Props = {
+  params: {
+    tripId: number;
+    journalId: number;
+  };
+};
 
+export default async function TripPage(props: Props) {
+  const singleTrip = await getTripById(Number(props.params.tripId));
+  const singleJournal = await getJournalById(Number(props.params.tripId));
+  const singleMap = await getMapById(Number(props.params.tripId));
+  const singleMediaFile = await getMediaFileById(Number(props.params.tripId));
+
+  if (!singleTrip || !singleJournal || !singleMap || !singleMediaFile) {
+    notFound();
+  }
+  console.log(singleJournal);
   return (
     <main>
-      This are my trips
-      {trips.map((trip) => {
-        return (
-          <div key={`trip-div-${trip.id}`}>
-            <Link href={`/trips/${trip.id}`}>{trip.name}</Link>
-            <br />
-          </div>
-        );
-      })}
+      <h1>{singleTrip.name}</h1>
+      <h2>{singleJournal.title}</h2>
+      <h3>{singleJournal.entry}</h3>
+      <h4>
+        {singleMap.lat}, {singleMap.long}
+      </h4>
+      <img src={singleMediaFile.url} alt="Media File" />
     </main>
   );
 }

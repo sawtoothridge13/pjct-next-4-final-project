@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <main className={styles.contentWrapper}>
       <section className={styles.heroArea}>
         <div>
           <h1 className={styles.h1}>Trip Tracker</h1>
@@ -21,6 +21,7 @@ export default function Home() {
           </h3>
         </div>
       </section>
+      <div className={styles.divider} />
     </main>
   );
 }
