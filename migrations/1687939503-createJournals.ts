@@ -37,7 +37,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       trip_id integer NOT NULL,
       title varchar(80) NOT NULL,
-      date timestamp ,
+      date integer ,
       entry text NOT NULL
     )
   `;

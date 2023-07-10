@@ -4,10 +4,14 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
+import { getTrips } from '../database/trips';
 import { getUserBySessionToken } from '../database/users';
 import tTlogo from '../public/images/tt-logo.png';
+import DropDownMenu from './components/DropDownMenu';
+import LoginButton from './components/LoginButton';
+import { LogoutButton } from './components/LogoutButton';
+import RegisterButton from './components/RegisterButton';
 import styles from './layout.module.scss';
-import { LogoutButton } from './LogoutButton';
 
 const inter = Fira_Code({ subsets: ['latin'] });
 
@@ -18,6 +22,11 @@ export default async function RootLayout({ children }: Props) {
   // 1. get the session token from the cookie
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
+  const trips = await getTrips();
+  const options = trips.map((trip) => ({
+    value: trip.id.toString(),
+    label: trip.name,
+  }));
 
   const user = !sessionToken?.value
     ? undefined
@@ -29,22 +38,21 @@ export default async function RootLayout({ children }: Props) {
         <main>
           <header className={styles.header}>
             <div className={styles.contentWrapper}>
-              <figure className={styles.figure}>
-                <a>
+              <nav className={`${styles.container} ${styles.nav}`}>
+                <figure>
                   <Image
                     src={tTlogo}
                     alt="trip tracker logo"
                     width={170}
                     height={114}
                   />
-                </a>
-              </figure>
-              <div className={styles.divider} />
-              <nav className={`${styles.container} ${styles.nav}`}>
+                </figure>
+                {user ? (
+                  <DropDownMenu options={options} />
+                ) : (
+                  <a href="/">Home</a>
+                )}
                 <ul className={styles.ul}>
-                  <li>
-                    <a href="/">Home</a>
-                  </li>
                   <li>
                     <a href="/about">About</a>
                   </li>
@@ -59,8 +67,8 @@ export default async function RootLayout({ children }: Props) {
                   </>
                 ) : (
                   <>
-                    <Link href="/register">register</Link>
-                    <Link href="/login">login</Link>
+                    <RegisterButton />
+                    <LoginButton />
                   </>
                 )}
 

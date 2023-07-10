@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTrips } from '../../../database/trips';
 import { getUserByUsername } from '../../../database/users';
-import DropDownMenu from './DropDownMenu';
+import DropDownMenu from '../../components/DropDownMenu';
 import styles from './page.module.scss';
 
 type Props = {

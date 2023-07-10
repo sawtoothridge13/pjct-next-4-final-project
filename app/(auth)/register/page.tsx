@@ -24,18 +24,14 @@ export default async function RegisterPage() {
   if (session) redirect('/');
   return (
     <main>
-      <section className={styles.heroArea}>
-        <div>
+      <div className={styles.heroArea}>
+        <div className={styles.contentWrapper}>
           <h1 className={styles.h1}>Register</h1>
-          <br />
-          <RegisterForm />
-          <h3 className={styles.h3}>
-            All of your adventures.
-            <br /> All of your memories.
-            <br /> All in one place.
-          </h3>
+          <div className={styles.loginForm}>
+            <RegisterForm />
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

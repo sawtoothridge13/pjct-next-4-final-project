@@ -6,26 +6,36 @@
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 75%;
+}
 
-  .h1 {
-    font-size: 2rem;
-    line-height: 5;
-  }
+.contentWrapper {
+  height: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
 
-  .h1,
-  .h3 {
-    color: azure;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150%;
-    margin: 0;
-  }
-  .contentWrapper {
-    background-color: black;
-    color: azure;
-    opacity: 50%;
-    display: flex;
-    width: 50%;
-  }
+.h1 {
+  font-size: 4rem;
+  font-family: 'American Typewriter', monospace;
+  font-weight: 400;
+  color: rgb(45, 45, 45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: row;
+  margin-bottom: 25px;
 }

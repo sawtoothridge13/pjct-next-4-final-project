@@ -9,19 +9,18 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className={styles.contentWrapper}>
-      <section className={styles.heroArea}>
-        <div>
+    <main>
+      <div className={styles.heroArea}>
+        <div className={styles.contentWrapper}>
           <h1 className={styles.h1}>Trip Tracker</h1>
           <br />
-          <h3 className={styles.h3}>
+          <h2 className={styles.h2}>
             All of your adventures.
             <br /> All of your memories.
             <br /> All in one place.
-          </h3>
+          </h2>
         </div>
-      </section>
-      <div className={styles.divider} />
+      </div>
     </main>
   );
 }

@@ -1,37 +1,35 @@
 import { cache } from 'react';
-import { MapLocation } from '../migrations/1687939518-createMapLocations';
+import { Map } from '../migrations/1687939518-createMaps';
 import { sql } from './connect';
 
 // functions to query database tables
 
 export const getMaps = cache(async () => {
-  const maps = await sql<MapLocation[]>`
-    SELECT * FROM map_locations
+  const maps = await sql<Map[]>`
+    SELECT * FROM maps
  `;
 
   return maps;
 });
 
-export const createMap = cache(
-  async (journalId: number, lat: string, long: number) => {
-    const [map] = await sql<MapLocation[]>`
-      INSERT INTO map_locations
-        (journal_id, lat, long)
+export const createMap = cache(async (journalId: number, url: string) => {
+  const [map] = await sql<Map[]>`
+      INSERT INTO maps
+        (journal_id, url)
       VALUES
-        (${journalId}, ${lat}, ${long})
+        (${journalId}, ${url})
       RETURNING *
     `;
 
-    return map;
-  },
-);
+  return map;
+});
 
 export const getMapById = cache(async (id: number) => {
-  const [map] = await sql<MapLocation[]>`
+  const [map] = await sql<Map[]>`
     SELECT
       *
     FROM
-      map_locations
+      maps
     WHERE
       id = ${id}
   `;
@@ -39,13 +37,12 @@ export const getMapById = cache(async (id: number) => {
 });
 
 export const updateMapById = cache(
-  async (id: number, journalId: number, lat: string, long: string) => {
-    const [map] = await sql<MapLocation[]>`
-      UPDATE map_locations
+  async (id: number, journalId: number, url: string) => {
+    const [map] = await sql<Map[]>`
+      UPDATE maps
       SET
         journal_id = ${journalId},
-        lat = ${lat},
-        long = ${long}
+        url = ${url}
       WHERE
         id = ${id}
         RETURNING *

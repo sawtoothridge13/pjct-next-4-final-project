@@ -1,25 +1,23 @@
 import { Sql } from 'postgres';
 
-export type MapLocation = {
+export type Map = {
   id: number;
   journalId: number;
-  lat: string;
-  long: string;
+  url: string;
 };
 
 export async function up(sql: Sql) {
   await sql`
-    CREATE TABLE map_locations (
+    CREATE TABLE maps (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       journal_id integer NOT NULL,
-      lat varchar(30) NOT NULL,
-      long varchar(30) NOT NULL
+      url varchar(300) NOT NULL
     )
   `;
 }
 
 export async function down(sql: Sql) {
   await sql`
-    DROP TABLE map_locations
+    DROP TABLE maps
   `;
 }

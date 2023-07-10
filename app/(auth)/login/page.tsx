@@ -22,18 +22,14 @@ export default async function LoginPage({ searchParams }: Props) {
   console.log('My search params', searchParams);
   return (
     <main>
-      <section className={styles.heroArea}>
-        <div>
+      <div className={styles.heroArea}>
+        <div className={styles.contentWrapper}>
           <h1 className={styles.h1}>Login</h1>
-          <br />
-          <LoginForm returnTo={searchParams.returnTo} />
-          <h3 className={styles.h3}>
-            All of your adventures.
-            <br /> All of your memories.
-            <br /> All in one place.
-          </h3>
+          <div className={styles.loginForm}>
+            <LoginForm returnTo={searchParams.returnTo} />
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { getTrips } from '../../database/trips';
+import DropDownMenu from '../components/DropDownMenu';
+import styles from '../components/DropDownMenu.module.scss';
 
 export const metadata = {
   title: 'Trips page',
@@ -8,18 +10,13 @@ export const metadata = {
 
 export default async function TripsPage() {
   const trips = await getTrips();
-
+  const options = trips.map((trip) => ({
+    value: trip.id.toString(),
+    label: trip.name,
+  }));
   return (
     <main>
-      This are my trips
-      {trips.map((trip) => {
-        return (
-          <div key={`trip-div-${trip.id}`}>
-            <Link href={`/trips/${trip.id}`}>{trip.name}</Link>
-            <br />
-          </div>
-        );
-      })}
+      <section className={styles.section}></section>
     </main>
   );
 }

@@ -1,6 +1,6 @@
 .button {
   align-self: center;
-  background-color: #fff;
+  background-color: #41403ee9;
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
@@ -8,14 +8,16 @@
   border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
   border-width: 2px;
-  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-shadow: antiquewhite 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: #41403e;
+  color: antiquewhite;
   cursor: pointer;
   display: inline-block;
   font-family: Neucha, sans-serif;
   font-size: 0.75rem;
   line-height: 23px;
+  margin-top: 1rem;
+  margin-left: 150px;
   outline: none;
   padding: 0.5rem;
   text-decoration: none;
@@ -40,4 +42,39 @@
 
 .error {
   background-color: red;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  background-color: #41403ee9;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 300px;
+  width: 400px;
+  border-style: line 5px;
+  border-color: antiquewhite;
+  border-radius: 5%;
+  box-shadow: 0 0 20px rgba(244, 243, 243, 0.1);
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+
+    .label {
+      font-size: larger;
+      color: antiquewhite;
+      margin: 10px;
+    }
+
+    .input {
+      margin: 10px;
+      border-radius: 10%;
+    }
+  }
 }

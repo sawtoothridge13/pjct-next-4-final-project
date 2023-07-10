@@ -37,29 +37,33 @@ export default function LoginForm(props: Props) {
     router.refresh();
   }
   return (
-    <form
-      className={styles.loginForm}
-      onSubmit={(event) => event.preventDefault()}
-    >
-      <label>
-        username:
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        password:
-        <input
-          value={password}
-          type="password"
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button className={styles.button} onClick={async () => await login()}>
-        log in
-      </button>
-      {error !== '' && <div className={styles.error}>{error}</div>}
-    </form>
+    <section className={styles.section}>
+      <form
+        className={styles.loginForm}
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <label className={styles.label}>
+          username:
+          <input
+            className={styles.input}
+            value={username}
+            onChange={(event) => setUsername(event.currentTarget.value)}
+          />
+        </label>
+        <label className={styles.label}>
+          password:
+          <input
+            className={styles.input}
+            value={password}
+            type="password"
+            onChange={(event) => setPassword(event.currentTarget.value)}
+          />
+        </label>
+        <button className={styles.button} onClick={async () => await login()}>
+          log in
+        </button>
+        {error !== '' && <div className={styles.error}>{error}</div>}
+      </form>
+    </section>
   );
 }

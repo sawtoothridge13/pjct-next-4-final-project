@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  margin: 50px;
+  column-gap: 20px;
+  width: 25%;
+  border: 1px solid #0b0b0b;
+}
+
+.scrollbar {
+  height: 400px;
+  overflow: auto;
+  padding: 0 10px;
+}
+/*       ScrollBar 1        */
+
+#scrollbar1::-webkit-scrollbar {
+  width: 16px;
+}
+
+#scrollbar1::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+
+#scrollbar1::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #d55959;
+}

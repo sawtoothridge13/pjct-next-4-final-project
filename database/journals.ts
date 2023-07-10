@@ -16,9 +16,9 @@ export const createJournal = cache(
   async (tripId: number, title: string, date: number, entry: string) => {
     const [journal] = await sql<Journal[]>`
       INSERT INTO journals
-        (trip_id, title, date, entry)
+        (trip_id, title, entry)
       VALUES
-        (${tripId}, ${title}, ${date}, ${entry})
+        (${tripId}, ${title}, ${entry})
       RETURNING *
     `;
 
@@ -52,6 +52,27 @@ export const updateJournalById = cache(
         trip_id = ${tripId},
         title = ${title},
         date = ${date},
+        entry = ${entry}
+      WHERE
+        id = ${id}
+        RETURNING *
+    `;
+
+    return journal;
+  },
+);
+
+
+export const updateJournalEntryById = cache(
+  async (
+    id: number,
+    tripId: number,
+    entry: string,
+  ) => {
+    const [journal] = await sql<Journal[]>`
+      UPDATE journals
+      SET
+        trip_id = ${tripId},
         entry = ${entry}
       WHERE
         id = ${id}
