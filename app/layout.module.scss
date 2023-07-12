@@ -66,6 +66,9 @@
   margin: 0px 0 0px 0;
 }
 .nav {
+  font-family: 'American Typewriter', monospace;
+  font-size: 1.5rem;
+  color: #41403e;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -75,6 +78,7 @@
   gap: 40px;
 
   .ul {
+    text-decoration: underline;
     list-style: none;
     display: inline-flex;
     justify-content: right;
@@ -157,9 +161,10 @@
 
   .contentWrapper {
     width: 55%;
-    margin: 50px 0;
+    margin: 0;
 
     .footerContent {
+      font-size: 1.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -167,7 +172,7 @@
 
       .address,
       .contact {
-        font-size: 0.75rem;
+        font-size: 1.2rem;
         font-style: normal;
         color: #04061f;
         margin-bottom: 50px;
@@ -177,7 +182,7 @@
       }
     }
     .copyright {
-      font-size: 0.5rem;
+      font-size: 1rem;
       font-style: normal;
       color: #04061f;
       .p {

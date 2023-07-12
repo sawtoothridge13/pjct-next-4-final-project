@@ -42,6 +42,7 @@ export default function LoginForm(props: Props) {
         className={styles.loginForm}
         onSubmit={(event) => event.preventDefault()}
       >
+        <h1 className={styles.h1}>Login</h1>
         <label className={styles.label}>
           username:
           <input

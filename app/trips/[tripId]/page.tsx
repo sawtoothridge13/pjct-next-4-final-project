@@ -3,9 +3,8 @@ import { getJournalById } from '../../../database/journals';
 import { getMapById } from '../../../database/maps';
 import { getMediaFileById } from '../../../database/mediaFiles';
 import { getTripById } from '../../../database/trips';
-import DropDownMenu from '../../components/DropDownMenu';
 import MapComponent from '../../components/MapComponent';
-import styles from './styles.module.scss';
+import styles from './TripStyles.module.scss';
 
 export const metadata = {
   title: 'Trip Page',
@@ -49,11 +48,22 @@ export default async function TripPage(props: Props) {
               </div>
             </form>
           </div>
-          <img
-            className={`${styles.imageContainer} ${styles.singleImage}`}
-            src={singleMediaFile.url}
-            alt="Media File"
-          />
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.singleImage}
+              src={singleMediaFile.url}
+              alt="Media File"
+            />
+            <form className={styles.uploadForm} action="/action_page.php">
+              <input
+                className={styles.button}
+                type="file"
+                id="myFile"
+                name="filename"
+              />
+              <input type="submit" />
+            </form>
+          </div>
         </section>
         <div className={styles.map}>
           <MapComponent />

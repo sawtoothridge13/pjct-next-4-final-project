@@ -24,7 +24,6 @@ export default async function LoginPage({ searchParams }: Props) {
     <main>
       <div className={styles.heroArea}>
         <div className={styles.contentWrapper}>
-          <h1 className={styles.h1}>Login</h1>
           <div className={styles.loginForm}>
             <LoginForm returnTo={searchParams.returnTo} />
           </div>

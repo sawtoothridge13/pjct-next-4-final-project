@@ -33,9 +33,10 @@ export default function RegisterForm() {
   return (
     <section className={styles.section}>
       <form
-        className={styles.loginForm}
+        className={styles.registerForm}
         onSubmit={(event) => event.preventDefault()}
       >
+        <h1 className={styles.h1}>Register</h1>
         <label className={styles.label}>
           username:
           <input

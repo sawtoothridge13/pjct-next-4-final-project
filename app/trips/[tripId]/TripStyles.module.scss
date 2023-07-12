@@ -1,0 +1,147 @@
+.main {
+  display: flex;
+  min-height: 600px;
+  position: relative;
+  background-image: url('../../../public/images/suitcases.jpeg');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  opacity: 75%;
+
+  .contentWrapper {
+    background-color: rgb(233, 227, 227);
+    width: 1000px;
+    margin: 2rem;
+    padding: 20px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 8px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 20);
+
+    .tripName {
+      font-family: 'American Typewriter', monospace;
+      text-decoration: underline;
+      color: #000;
+      font-weight: 400;
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: row;
+      margin: 2rem;
+      gap: 20px;
+
+      .journalContainer {
+        width: 300px;
+        height: 300px;
+        background-color: #b6c9d1;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 10);
+
+        .form {
+          flex: 1;
+        }
+
+        .journalTitle {
+          font-size: 20px;
+          margin: 0 0 10px 0;
+        }
+        .textarea {
+          width: 280px;
+          height: 206px;
+          resize: none;
+          padding: 10px;
+          align-self: center;
+          background-color: #fff;
+          background-image: none;
+          background-position: 0 90%;
+          background-repeat: repeat no-repeat;
+          background-size: 4px 3px;
+          border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+          border-style: solid;
+          border-width: 2px;
+          box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+          border-bottom-left-radius: 5px 200px;
+          border-bottom-right-radius: 225px 5px;
+          border-top-left-radius: 255px 5px;
+          border-top-right-radius: 5px 225px;
+        }
+
+        .button {
+          align-self: center;
+          background-color: #fff;
+          background-image: none;
+          background-position: 0 90%;
+          background-repeat: repeat no-repeat;
+          background-size: 4px 3px;
+          border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+          border-style: solid;
+          border-width: 2px;
+          box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+          box-sizing: border-box;
+          color: #41403e;
+          cursor: pointer;
+          display: inline-block;
+          font-family: Neucha, sans-serif;
+          font-size: 0.75rem;
+          line-height: 23px;
+          outline: none;
+          margin-left: 15rem;
+          padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+          text-decoration: none;
+          transition: all 235ms ease-in-out;
+          border-bottom-left-radius: 15px 255px;
+          border-bottom-right-radius: 225px 15px;
+          border-top-left-radius: 255px 15px;
+          border-top-right-radius: 15px 225px;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+        }
+
+        .button:hover {
+          box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+          transform: translate3d(0, 2px, 0);
+        }
+
+        .button:focus {
+          box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+        }
+      }
+    }
+
+    .imageContainer {
+      width: 506px;
+      height: 300px;
+      background-color: #b6c9d1;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 10);
+      .singleImage {
+        max-height: 95%;
+        border-radius: 8px;
+      }
+      .uploadForm {
+        object-fit: contain;
+        float: right;
+      }
+    }
+
+    .map {
+      background-color: #b6c9d1;
+      display: flex;
+      justify-content: center;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 10);
+    }
+  }
+}

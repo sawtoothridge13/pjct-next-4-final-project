@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { getMapById } from '../../database/maps';
 import styles from './MapComponent.module.scss';
 
 export default function MapFrame() {

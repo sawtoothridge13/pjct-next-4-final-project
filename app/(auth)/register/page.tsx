@@ -26,7 +26,6 @@ export default async function RegisterPage() {
     <main>
       <div className={styles.heroArea}>
         <div className={styles.contentWrapper}>
-          <h1 className={styles.h1}>Register</h1>
           <div className={styles.loginForm}>
             <RegisterForm />
           </div>

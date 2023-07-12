@@ -53,18 +53,27 @@
   text-align: center;
   height: 300px;
   width: 400px;
-  border-style: line 5px;
+  border-style: solid;
   border-color: antiquewhite;
+  border-width: 5px;
   border-radius: 5%;
   box-shadow: 0 0 20px rgba(244, 243, 243, 0.1);
 
-  .loginForm {
+  .registerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    height: 300px;
     max-width: 400px;
     margin: 0 auto;
+
+    .h1 {
+      font-family: 'American Typewriter', monospace;
+      font-size: 2rem;
+      font-weight: 400;
+      color: antiquewhite;
+    }
 
     .label {
       font-size: larger;
@@ -73,8 +82,11 @@
     }
 
     .input {
+      background-color: antiquewhite;
       margin: 10px;
-      border-radius: 10%;
+      border-radius: 5px;
+      border-style: solid;
+      border-color: rgb(0, 0, 0);
     }
   }
 }
