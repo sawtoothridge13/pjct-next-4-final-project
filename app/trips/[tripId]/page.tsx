@@ -21,11 +21,11 @@ type Props = {
   };
 };
 
-export default async function TripPage(props: Props) {
-  const singleTrip = await getTripById(Number(props.params.tripId));
-  const singleJournal = await getJournalById(Number(props.params.tripId));
-  const singleMap = await getMapById(Number(props.params.tripId));
-  const singleMediaFile = await getMediaFileById(Number(props.params.tripId));
+export default async function TripPage({ params }: Props) {
+  const singleTrip = await getTripById(Number(params.tripId));
+  const singleJournal = await getJournalById(Number(params.tripId));
+  const singleMap = await getMapById(Number(params.tripId));
+  const singleMediaFile = await getMediaFileById(Number(params.tripId));
 
   if (!singleTrip || !singleJournal || !singleMap || !singleMediaFile) {
     notFound();
@@ -49,6 +49,7 @@ export default async function TripPage(props: Props) {
             </form>
           </div>
           <div className={styles.imageContainer}>
+            <h2 className={styles.h2}>Media Gallery</h2>
             <img
               className={styles.singleImage}
               src={singleMediaFile.url}

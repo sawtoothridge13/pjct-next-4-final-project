@@ -1,15 +1,16 @@
 .heroArea {
-  min-height: 600px;
+  min-height: 850px;
   position: relative;
   background-image: url('../../../public/images/suitcases.jpeg');
   background-position: center right;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 75%;
+  align-items: center;
 }
 
 .contentWrapper {
-  height: 600px;
+  height: 775px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 0px rgba(0, 0, 0, 20);
