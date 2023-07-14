@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
-import { getJournalById } from '../../../database/journals';
-import { getMapById } from '../../../database/maps';
-import { getMediaFileById } from '../../../database/mediaFiles';
-import { getTripById } from '../../../database/trips';
-import MapComponent from '../../components/MapComponent';
+import { getJournalById } from '../../../../database/journals';
+import { getMapById } from '../../../../database/maps';
+import { getMediaFileById } from '../../../../database/mediaFiles';
+import { getTripById } from '../../../../database/trips';
+import MapComponent from '../../../components/MapComponent';
 import styles from './TripStyles.module.scss';
 
 export const metadata = {

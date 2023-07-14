@@ -40,10 +40,93 @@ PRODUCT FEATURES
 
 ## DESIGNS
 
-    - Wire Frame - https://www.figma.com/file/TV4DqiignvNwqUq9bpkQVh/Final-Project?type=design&node-id=2%3A2689&t=OIVGZBL6rjjiwGAH-1
+    - Wire Frame - https://www.figma.com/file/vcxDDb0EsUKCSnjOQERhng/Final-Project-2?type=design&node-id=1%3A338&mode=design&t=xmssnOhmhYaGYld1-1
+
     - Database Design –
 
-https://drawsql.app/teams/doug-andrews-team/diagrams/trip-tracker - API Design -
+https://drawsql.app/teams/doug-andrews-team/diagrams/trip-tracker
+
+# API DESIGN
+
+```ts
+type Animal = {
+  id: number;
+  type: string;
+  firstName: string;
+  accessory: string | null;
+};
+
+type Error = {
+  message: string;
+};
+```
+
+```txt
+/
+ - GET => endpoints[]
+
+/user
+ - GET =>       user[]
+ - POST =>      user   | error
+
+/user/:id
+ - PUT =>       user   | error
+ - DELETE =>    user   | error
+ - GET =>       user   | error
+
+//////////////////////////////
+
+/register
+ - POST => user | error
+
+/login
+ - POST => user | error
+
+//////////////////////////////
+
+/trips
+ - GET =>       trips[]
+ - POST =>      trips   | error
+
+/trips/:id
+ - PUT =>       trip    | error
+ - DELETE =>    trip    | error
+ - GET =>       trip    | error
+
+//////////////////////////////
+
+/trips/:tripId/journals
+ - GET =>       journals[]
+ - POST =>      journals   | error
+
+/trips/:tripId/jjournals/:id
+ - PUT =>       journal    | error
+ - DELETE =>    journal    | error
+ - GET =>       journal    | error
+
+ //////////////////////////////
+
+/trips/:tripId/journals/:journalId/maps
+ - GET =>       maps[]
+ - POST =>      maps   | error
+
+/trips/:tripId/journals/:journalId/maps:id
+ - PUT =>       map    | error
+ - DELETE =>    map    | error
+ - GET =>       map    | error
+
+ //////////////////////////////
+
+/trips/:tripId/journals/:journalId/media-files
+ - GET =>       media-file    | error
+ - POST =>      media-files   | error
+
+/trips/:tripId/journals/:journalId/media-files:id
+ - PUT =>       media-file    | error
+ - DELETE =>    media-file    | error
+ - GET =>       media-file    | error
+
+```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
