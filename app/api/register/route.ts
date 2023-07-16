@@ -3,16 +3,16 @@ import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createSession } from '../../../../database/sessions';
-import { getUserWithPasswordHashByUsername } from '../../../../database/users';
-import { User } from '../../../../migrations/1687761074-createUsers';
-import { secureCookieOptions } from '../../../../util/cookies';
+import { createSession } from '../../../database/sessions';
+import { createUser, getUserByUsername } from '../../../database/users';
+import { User } from '../../../migrations/1687761074-createUsers';
+import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
   error: string;
 };
 
-export type LoginResponseBodyPost =
+export type RegisterResponseBodyPost =
   | {
       user: User;
     }
@@ -25,7 +25,7 @@ const userSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<LoginResponseBodyPost>> {
+): Promise<NextResponse<RegisterResponseBodyPost>> {
   const body = await request.json();
 
   // 1. get the credentials from the body
@@ -43,44 +43,41 @@ export async function POST(
     );
   }
 
-  // 3. verify the user credentials
-  const userWithPasswordHash = await getUserWithPasswordHashByUsername(
-    result.data.username,
-  );
-
-  if (!userWithPasswordHash) {
+  if (await getUserByUsername(result.data.username)) {
     // zod send you details about the error
     // console.log(result.error);
     return NextResponse.json(
       {
-        error: 'user or password not valid',
+        error: 'username is already used',
       },
-      { status: 401 },
+      { status: 406 },
     );
   }
 
   // 3. hash the password
-  const isPasswordValid = await bcrypt.compare(
-    result.data.password,
-    userWithPasswordHash.passwordHash,
-  );
+  const passwordHash = await bcrypt.hash(result.data.password, 10);
 
-  if (!isPasswordValid) {
+  // 4. store the credentials in the db
+  const newUser = await createUser(result.data.username, passwordHash);
+
+  if (!newUser) {
+    // zod send you details about the error
+    // console.log(result.error);
     return NextResponse.json(
       {
-        error: 'user or password not valid',
+        error: 'Error creating the new user',
       },
-      { status: 401 },
+      { status: 500 },
     );
   }
 
   // We are sure the user is authenticated
 
-  // 4. Create a token
+  // 5. Create a token
   const token = crypto.randomBytes(100).toString('base64');
-  // 5. Create the session record
+  // 6. Create the session record
 
-  const session = await createSession(token, userWithPasswordHash.id);
+  const session = await createSession(token, newUser.id);
 
   if (!session) {
     return NextResponse.json(
@@ -91,22 +88,13 @@ export async function POST(
     );
   }
 
-  // 6. Send the new cookie in the headers
+  // 7. Send the new cookie in the headers
   cookies().set({
     name: 'sessionToken',
     value: session.token,
     ...secureCookieOptions,
   });
 
-  return NextResponse.json(
-    {
-      user: {
-        username: userWithPasswordHash.username,
-        id: userWithPasswordHash.id,
-      },
-    },
-    {
-      status: 200,
-    },
-  );
+  // 7. return the new user to the client
+  return NextResponse.json({ user: newUser });
 }

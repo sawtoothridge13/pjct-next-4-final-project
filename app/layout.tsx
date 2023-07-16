@@ -2,7 +2,6 @@ import './globals.scss';
 import { Fira_Code } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import { getTrips } from '../database/trips';
 import { getUserBySessionToken } from '../database/users';
@@ -38,7 +37,7 @@ export default async function RootLayout({ children }: Props) {
         <main>
           <header className={styles.header}>
             <div className={styles.contentWrapper}>
-              <nav className={`${styles.container} ${styles.nav}`}>
+              <nav className={styles.nav}>
                 <figure>
                   <Image
                     src={tTlogo}

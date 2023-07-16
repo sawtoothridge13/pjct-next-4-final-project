@@ -13,7 +13,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(80) NOT NULL UNIQUE,
       user_id integer NOT NULL,
-      is_private boolean
+      is_private boolean NULL
     )
   `;
 }

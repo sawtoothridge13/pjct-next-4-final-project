@@ -49,16 +49,7 @@ https://drawsql.app/teams/doug-andrews-team/diagrams/trip-tracker
 # API DESIGN
 
 ```ts
-type Animal = {
-  id: number;
-  type: string;
-  firstName: string;
-  accessory: string | null;
-};
 
-type Error = {
-  message: string;
-};
 ```
 
 ```txt
@@ -99,7 +90,7 @@ type Error = {
  - GET =>       journals[]
  - POST =>      journals   | error
 
-/trips/:tripId/jjournals/:id
+/trips/:tripId/journals/:id
  - PUT =>       journal    | error
  - DELETE =>    journal    | error
  - GET =>       journal    | error

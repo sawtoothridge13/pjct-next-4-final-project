@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { MediaFile } from '../migrations/1687939537-createMediaFiles';
+import { MediaFile } from '../migrations/1687939537-createMediaFilesTable';
 import { sql } from './connect';
 
 // functions to query database tables

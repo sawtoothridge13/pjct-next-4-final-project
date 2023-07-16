@@ -67,3 +67,26 @@ export const getUserBySessionToken = cache(async (token: string) => {
 
   return user;
 });
+
+export const updateUserById = cache(async (id: number, username: string) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+      UPDATE users
+      SET
+        username = ${username.toLowerCase()}
+      WHERE
+        id = ${id}
+        RETURNING *
+    `;
+  return user;
+});
+
+export const deleteUserById = cache(async (id: number) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+      DELETE FROM
+        users
+      WHERE
+        id = ${id}
+        RETURNING *
+    `;
+  return user;
+});

@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Trip } from '../migrations/1687932835-createTrips';
+import { Trip } from '../migrations/1687932835-createTripsTable';
 import { sql } from './connect';
 
 // functions to query database tables
@@ -21,7 +21,7 @@ export const createTrip = cache(
         (${name}, ${userId}, ${isPrivate})
       RETURNING *
     `;
-
+    console.log(trip);
     return trip;
   },
 );
@@ -39,7 +39,12 @@ export const getTripById = cache(async (id: number) => {
 });
 
 export const updateTripById = cache(
-  async (id: number, name: string, userId: number, isPrivate: boolean) => {
+  async (
+    id: number,
+    name: string,
+    userId: number,
+    isPrivate: boolean | null,
+  ) => {
     const [trip] = await sql<Trip[]>`
       UPDATE trips
       SET

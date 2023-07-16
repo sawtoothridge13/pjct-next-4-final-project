@@ -30,7 +30,6 @@ export default async function TripPage({ params }: Props) {
   if (!singleTrip || !singleJournal || !singleMap || !singleMediaFile) {
     notFound();
   }
-  console.log(singleJournal);
   return (
     <main className={styles.main}>
       <div className={styles.contentWrapper}>
@@ -55,7 +54,7 @@ export default async function TripPage({ params }: Props) {
               src={singleMediaFile.url}
               alt="Media File"
             />
-            <form className={styles.uploadForm} action="/action_page.php">
+            <form className={styles.uploadForm} action={'/action_page.php'}>
               <input
                 className={styles.button}
                 type="file"

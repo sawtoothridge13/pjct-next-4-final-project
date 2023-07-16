@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Map } from '../migrations/1687939518-createMaps';
+import { Map } from '../migrations/1687939518-createMapsTable';
 import { sql } from './connect';
 
 // functions to query database tables

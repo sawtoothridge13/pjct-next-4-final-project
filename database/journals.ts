@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Journal } from '../migrations/1687939503-createJournals';
+import { Journal } from '../migrations/1687939503-createJournalsTable';
 import { sql } from './connect';
 
 // functions to query database tables
@@ -16,9 +16,9 @@ export const createJournal = cache(
   async (tripId: number, title: string, date: number, entry: string) => {
     const [journal] = await sql<Journal[]>`
       INSERT INTO journals
-        (trip_id, title, entry)
+        (trip_id, title, date, entry)
       VALUES
-        (${tripId}, ${title}, ${entry})
+        (${tripId}, ${title}, ${date}, ${entry})
       RETURNING *
     `;
 
@@ -62,13 +62,8 @@ export const updateJournalById = cache(
   },
 );
 
-
 export const updateJournalEntryById = cache(
-  async (
-    id: number,
-    tripId: number,
-    entry: string,
-  ) => {
+  async (id: number, tripId: number, entry: string) => {
     const [journal] = await sql<Journal[]>`
       UPDATE journals
       SET

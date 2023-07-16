@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
+import { RegisterResponseBodyPost } from '../../api/register/route';
 import styles from './RegisterForm.module.scss';
 
 export default function RegisterForm() {

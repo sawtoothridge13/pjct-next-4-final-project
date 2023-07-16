@@ -1,11 +1,11 @@
 import { Sql } from 'postgres';
 
 export const trips = [
-  { id: 1, name: 'Vietnam', userId: 1, isPrivate: null },
-  { id: 2, name: 'Schwyz', userId: 2, isPrivate: null },
-  { id: 3, name: 'Vienna', userId: 3, isPrivate: null },
-  { id: 4, name: 'Wyoming', userId: 4, isPrivate: null },
-  { id: 5, name: 'Spain', userId: 5, isPrivate: null },
+  { id: 1, name: 'Vietnam', userId: 1, isPrivate: false },
+  { id: 2, name: 'Schwyz', userId: 2, isPrivate: false },
+  { id: 3, name: 'Vienna', userId: 3, isPrivate: false },
+  { id: 4, name: 'Wyoming', userId: 4, isPrivate: false },
+  { id: 5, name: 'Spain', userId: 5, isPrivate: false },
 ];
 
 export async function up(sql: Sql) {
