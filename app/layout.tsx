@@ -1,5 +1,4 @@
 import './globals.scss';
-import { Fira_Code } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
@@ -11,8 +10,6 @@ import LoginButton from './components/LoginButton';
 import { LogoutButton } from './components/LogoutButton';
 import RegisterButton from './components/RegisterButton';
 import styles from './layout.module.scss';
-
-const inter = Fira_Code({ subsets: ['latin'] });
 
 type Props = {
   children: ReactNode;
@@ -32,7 +29,7 @@ export default async function RootLayout({ children }: Props) {
     : await getUserBySessionToken(sessionToken.value);
 
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" suppressHydrationWarning={true}>
       <body>
         <main>
           <header className={styles.header}>
@@ -40,6 +37,7 @@ export default async function RootLayout({ children }: Props) {
               <nav className={styles.nav}>
                 <figure>
                   <Image
+                    priority={true}
                     src={tTlogo}
                     alt="trip tracker logo"
                     width={170}

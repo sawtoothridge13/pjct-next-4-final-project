@@ -1,4 +1,4 @@
-import { config } from 'dotenv-safe';
+import { config } from 'dotenv';
 import postgres from 'postgres';
 
 config();

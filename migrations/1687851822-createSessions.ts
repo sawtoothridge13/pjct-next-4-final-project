@@ -3,7 +3,7 @@ import { Sql } from 'postgres';
 export type Session = {
   id: number;
   token: string;
-  userId: number;
+  userId: number | null;
 };
 
 export async function up(sql: Sql) {

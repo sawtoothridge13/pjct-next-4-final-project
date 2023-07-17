@@ -1,17 +1,17 @@
 .input-container {
   position: relative;
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
 }
 
 .input-field {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  padding-right: 16px; /* Adjust the padding as needed to accommodate the scrollbar */
+  padding-right: 16px;
 }
 
 .input-field::-webkit-scrollbar {
-  width: 8px; /* Adjust the width as needed */
+  width: 8px;
 }
 
 .input-field::-webkit-scrollbar-thumb {

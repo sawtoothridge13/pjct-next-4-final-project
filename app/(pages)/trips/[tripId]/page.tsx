@@ -38,10 +38,10 @@ export default async function TripPage({ params }: Props) {
         <section className={styles.section}>
           <div className={styles.journalContainer}>
             <form className={styles.form}>
-              <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
+              {/* <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
               <textarea className={styles.textarea}>
                 {singleJournal.entry}
-              </textarea>
+              </textarea> */}
               <div>
                 <button className={styles.button}>update</button>
               </div>
@@ -54,7 +54,7 @@ export default async function TripPage({ params }: Props) {
               src={singleMediaFile.url}
               alt="Media File"
             />
-            <form className={styles.uploadForm} action={'/action_page.php'}>
+            <form className={styles.uploadForm} action="/action_page.php">
               <input
                 className={styles.button}
                 type="file"

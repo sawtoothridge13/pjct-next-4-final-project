@@ -4,7 +4,6 @@ export type Trip = {
   id: number;
   name: string;
   userId: number;
-  isPrivate: boolean | null;
 };
 
 export async function up(sql: Sql) {
@@ -12,8 +11,7 @@ export async function up(sql: Sql) {
     CREATE TABLE trips (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(80) NOT NULL UNIQUE,
-      user_id integer NOT NULL,
-      is_private boolean NULL
+      user_id integer NOT NULL
     )
   `;
 }

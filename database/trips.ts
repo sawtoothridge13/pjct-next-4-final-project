@@ -12,17 +12,57 @@ export const getTrips = cache(async () => {
   return trips;
 });
 
-export const createTrip = cache(
-  async (name: string, userId: number, isPrivate: boolean) => {
-    const [trip] = await sql<Trip[]>`
+export const createTrip = cache(async (name: string, userId: number) => {
+  const [trip] = await sql<Trip[]>`
       INSERT INTO trips
-        (name, user_id, is_private)
+        (name, user_id)
       VALUES
-        (${name}, ${userId}, ${isPrivate})
+        (${name}, ${userId})
       RETURNING *
     `;
-    console.log(trip);
-    return trip;
+  console.log(trip);
+  return trip;
+});
+
+export const getTripsWithLimitAndOffset = cache(
+  async (limit: number, offset: number) => {
+    const trips = await sql<Trip[]>`
+      SELECT
+        *
+      FROM
+        trips
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
+
+    return trips;
+  },
+);
+
+export const getTripsWithLimitAndOffsetBySessionToken = cache(
+  async (limit: number, offset: number, token: string) => {
+    const trips = await sql<Trip[]>`
+      SELECT
+        trips.*
+      FROM
+        trips
+      INNER JOIN
+        sessions ON (
+          sessions.token = ${token} AND
+          sessions.expiry_timestamp > now() AND
+          sessions.user_id = trips.user_id
+        )
+      -- This would JOIN the users table that is related to trips
+      INNER JOIN
+      users ON (
+      users.id = trips.user_id AND
+      sessions.user_id = users.id
+      )
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
+
+    return trips;
   },
 );
 
@@ -39,18 +79,12 @@ export const getTripById = cache(async (id: number) => {
 });
 
 export const updateTripById = cache(
-  async (
-    id: number,
-    name: string,
-    userId: number,
-    isPrivate: boolean | null,
-  ) => {
+  async (id: number, name: string, userId: number) => {
     const [trip] = await sql<Trip[]>`
       UPDATE trips
       SET
         name = ${name},
-        user_id = ${userId},
-        is_private = ${isPrivate}
+        user_id = ${userId}
       WHERE
         id = ${id}
         RETURNING *

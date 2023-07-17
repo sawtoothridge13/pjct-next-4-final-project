@@ -1,31 +1,40 @@
-.container {
+.main {
   display: flex;
-  margin: 50px;
-  column-gap: 20px;
-  width: 25%;
-  border: 1px solid #0b0b0b;
-}
+  min-height: 600px;
+  position: relative;
+  background-image: url('../../../../public/images/suitcase.jpeg');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  opacity: 75%;
 
-.scrollbar {
-  height: 400px;
-  overflow: auto;
-  padding: 0 10px;
-}
-/*       ScrollBar 1        */
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .h1 {
+    font-size: 2rem;
+    line-height: 5;
+  }
 
-#scrollbar1::-webkit-scrollbar {
-  width: 16px;
-}
-
-#scrollbar1::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background-color: #e7e7e7;
-  border: 1px solid #cacaca;
-}
-
-#scrollbar1::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  border: 3px solid transparent;
-  background-clip: content-box;
-  background-color: #d55959;
+  .h1,
+  .h2,
+  .h3 {
+    color: rgb(7, 7, 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150%;
+    margin: 0;
+  }
+  .contentWrapper {
+    background-color: black;
+    color: azure;
+    opacity: 50%;
+    display: flex;
+    width: 50%;
+  }
 }
