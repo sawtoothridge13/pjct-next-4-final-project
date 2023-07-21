@@ -2,8 +2,11 @@ import { notFound } from 'next/navigation';
 import { getJournalById } from '../../../../database/journals';
 import { getMapById } from '../../../../database/maps';
 import { getMediaFileById } from '../../../../database/mediaFiles';
-import { getTripById } from '../../../../database/trips';
+import { getTripById, getTrips } from '../../../../database/trips';
+import JournalEntryForm from '../../../components/JournalEntryForm';
+import MapBoxComponent from '../../../components/MapBoxComponent';
 import MapComponent from '../../../components/MapComponent';
+import TripsForm from '../../../components/TripsForm';
 import styles from './TripStyles.module.scss';
 
 export const metadata = {
@@ -22,6 +25,7 @@ type Props = {
 };
 
 export default async function TripPage({ params }: Props) {
+  const trips = await getTrips();
   const singleTrip = await getTripById(Number(params.tripId));
   const singleJournal = await getJournalById(Number(params.tripId));
   const singleMap = await getMapById(Number(params.tripId));
@@ -34,14 +38,15 @@ export default async function TripPage({ params }: Props) {
     <main className={styles.main}>
       <div className={styles.contentWrapper}>
         <h1 className={styles.tripName}>{singleTrip.name}</h1>
-
+        <TripsForm trips={trips} />
         <section className={styles.section}>
           <div className={styles.journalContainer}>
             <form className={styles.form}>
-              {/* <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
-              <textarea className={styles.textarea}>
-                {singleJournal.entry}
-              </textarea> */}
+              <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
+              <textarea
+                className={styles.textarea}
+                defaultValue={singleJournal.entry}
+              />
               <div>
                 <button className={styles.button}>update</button>
               </div>
@@ -66,7 +71,7 @@ export default async function TripPage({ params }: Props) {
           </div>
         </section>
         <div className={styles.map}>
-          <MapComponent />
+          <MapBoxComponent />
         </div>
       </div>
     </main>

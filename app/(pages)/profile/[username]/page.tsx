@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getTrips } from '../../../../database/trips';
 import { getUserByUsername } from '../../../../database/users';
-import TripsForm from '../../trips/TripsForm';
+import TripsForm from '../../../components/TripsForm';
 // import { getValidSessionByToken } from '../../../../database/sessions';
 import styles from './page.module.scss';
 
@@ -23,7 +23,7 @@ export default async function ProfileUsernamePage({ params }: Props) {
   if (!user) {
     notFound();
   }
-
+  redirect('/trips/1');
   return (
     <main className={styles.main}>
       <div>

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Trip } from '../../../migrations/1687932835-createTripsTable';
+import { Trip } from '../../migrations/1687932835-createTripsTable';
 import styles from './TripsForm.module.scss';
 
 type Props = {

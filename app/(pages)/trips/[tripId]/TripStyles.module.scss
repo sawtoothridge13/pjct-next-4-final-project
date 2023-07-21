@@ -110,13 +110,12 @@
         border-radius: 5px;
       }
     }
-
-    .map {
-      background-color: #b6c9d1;
-      display: flex;
-      justify-content: center;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 10);
-    }
+  }
+  .map {
+    background-color: #b6c9d1;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 10);
   }
 }

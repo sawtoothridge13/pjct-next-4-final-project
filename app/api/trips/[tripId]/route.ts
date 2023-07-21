@@ -80,7 +80,6 @@ export async function PUT(
 ): Promise<NextResponse<TripResponseBodyPut>> {
   const tripId = Number(params.tripId);
   const body = await request.json();
-
   if (!tripId) {
     return NextResponse.json(
       {
@@ -118,7 +117,7 @@ export async function PUT(
       { status: 404 },
     );
   }
-
+  console.log(trip);
   return NextResponse.json({
     trip: trip,
   });
