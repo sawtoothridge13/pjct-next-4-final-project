@@ -44,11 +44,8 @@ export default async function RootLayout({ children }: Props) {
                     height={114}
                   />
                 </figure>
-                {user ? (
-                  <DropDownMenu options={options} />
-                ) : (
-                  <a href="/">Home</a>
-                )}
+                {user ? <a href="/trips/1">Dashboard</a> : <a href="/">Home</a>}
+
                 <ul className={styles.ul}>
                   <li>
                     <a href="/about">About</a>
@@ -116,3 +113,9 @@ export default async function RootLayout({ children }: Props) {
     </html>
   );
 }
+
+/* {user ? (
+                  <DropDownMenu options={options} />
+                ) : (
+                  <a href="/">Home</a>
+                )} */

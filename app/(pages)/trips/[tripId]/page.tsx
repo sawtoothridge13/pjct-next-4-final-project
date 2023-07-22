@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getJournalById } from '../../../../database/journals';
 import { getMapById } from '../../../../database/maps';
 import { getMediaFileById } from '../../../../database/mediaFiles';
 import { getTripById, getTrips } from '../../../../database/trips';
+import DropDownMenu from '../../../components/DropDownMenu';
 import JournalEntryForm from '../../../components/JournalEntryForm';
 import MapBoxComponent from '../../../components/MapBoxComponent';
 import MapComponent from '../../../components/MapComponent';
@@ -30,6 +32,10 @@ export default async function TripPage({ params }: Props) {
   const singleJournal = await getJournalById(Number(params.tripId));
   const singleMap = await getMapById(Number(params.tripId));
   const singleMediaFile = await getMediaFileById(Number(params.tripId));
+  const options = trips.map((trip) => ({
+    value: trip.id.toString(),
+    label: trip.name,
+  }));
 
   if (!singleTrip || !singleJournal || !singleMap || !singleMediaFile) {
     notFound();
@@ -37,12 +43,24 @@ export default async function TripPage({ params }: Props) {
   return (
     <main className={styles.main}>
       <div className={styles.contentWrapper}>
-        <h1 className={styles.tripName}>{singleTrip.name}</h1>
-        <TripsForm trips={trips} />
-        <section className={styles.section}>
+        <DropDownMenu options={options} />
+        <div>
+          <Link className={styles.manageLink} href="/trips">
+            manage trips
+          </Link>
+        </div>
+        <br />
+        <section className={styles.topSection}>
+          <h1 className={styles.tripName}>
+            {singleTrip.name}
+            <br />
+          </h1>
+        </section>
+        <section className={styles.middleSection}>
           <div className={styles.journalContainer}>
             <form className={styles.form}>
               <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
+
               <textarea
                 className={styles.textarea}
                 defaultValue={singleJournal.entry}

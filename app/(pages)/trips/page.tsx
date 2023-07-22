@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getTrips } from '../../../database/trips';
+import TripsForm from '../../components/TripsForm';
 
 export const metadata = {
   title: 'Trips page',
@@ -11,17 +12,9 @@ export default async function TripsPage() {
 
   return (
     <main>
-      This are my trips
-      {trips.map((trip) => {
-        return (
-          <div
-            key={`trip-div-${trip.id}`}
-            data-test-id={`trip-name-${trip.name}`}
-          >
-            <Link href={`/trips/${trip.id}`}>{trip.name}</Link>
-          </div>
-        );
-      })}
+      <div>
+        <TripsForm trips={trips} />
+      </div>
     </main>
   );
 }

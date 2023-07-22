@@ -1,5 +1,4 @@
 .dropdown {
-  position: relative;
   display: inline-block;
   font-family: 'American Typewriter', monospace;
   font-size: 16px;
@@ -34,6 +33,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  position: sticky;
 }
 
 .dropdownToggle:hover {
