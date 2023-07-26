@@ -22,7 +22,6 @@ export async function GET(
 ): Promise<NextResponse<TripResponseBodyGet>> {
   const tripId = Number(params.tripId);
   if (!tripId) {
-    console.log(tripId);
     return NextResponse.json(
       {
         error: 'Trip id is not valid',
@@ -80,6 +79,7 @@ export async function PUT(
 ): Promise<NextResponse<TripResponseBodyPut>> {
   const tripId = Number(params.tripId);
   const body = await request.json();
+
   if (!tripId) {
     return NextResponse.json(
       {
@@ -91,7 +91,6 @@ export async function PUT(
 
   // zod please verify the body matches my schema
   const result = tripSchema.safeParse(body);
-
   if (!result.success) {
     // zod send you details about the error
     // console.log(result.error);
@@ -108,7 +107,6 @@ export async function PUT(
     result.data.name,
     result.data.userId,
   );
-
   if (!trip) {
     return NextResponse.json(
       {

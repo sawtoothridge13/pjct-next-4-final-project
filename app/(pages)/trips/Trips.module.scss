@@ -1,40 +1,35 @@
+/* Styles for desktop */
 .main {
-  display: flex;
-  min-height: 600px;
+  height: 75dvh;
+  width: 100dvw;
   position: relative;
-  background-image: url('../../../../public/images/suitcase.jpeg');
-  background-position: center right;
+  background-image: url('../../../public/images/suitcases.jpeg');
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 0.75;
+  display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 75%;
 
-  .section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .h1 {
-    font-size: 2rem;
-    line-height: 5;
-  }
-
-  .h1,
-  .h2,
-  .h3 {
-    color: rgb(7, 7, 7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150%;
-    margin: 0;
-  }
   .contentWrapper {
-    background-color: black;
-    color: azure;
-    opacity: 50%;
     display: flex;
-    width: 50%;
+    flex-direction: column;
+    .h1 {
+      font-size: 4rem;
+      line-height: 2;
+      margin-bottom: 40px;
+    }
+
+    .h1,
+    .h2 {
+      font-family: 'American Typewriter', monospace;
+      font-weight: 400;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
   }
 }

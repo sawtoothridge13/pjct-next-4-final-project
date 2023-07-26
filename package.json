@@ -21,7 +21,7 @@
     "dotenv-cli": "^7.2.1",
     "dotenv-safe": "^8.2.0",
     "mapbox-gl": "^2.15.0",
-    "next": "13.4.10",
+    "next": "13.4.12",
     "next-js-example-spring-2023-vienna-austria": "link:",
     "pg-connection-string": "^2.6.0",
     "postgres": "^3.3.5",

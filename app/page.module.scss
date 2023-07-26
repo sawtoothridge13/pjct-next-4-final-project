@@ -1,43 +1,35 @@
 /* Styles for desktop */
 .heroArea {
-  min-height: 850px;
+  height: 75dvh;
+  width: 100dvw;
   position: relative;
   background-image: url('../public/images/suitcases.jpeg');
-  background-position: center right;
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 75%;
-}
-
-.contentWrapper {
-  height: 400px;
-  width: 400px;
-  padding: 20px;
-  box-shadow: 0 0 0px rgba(0, 0, 0, 20);
+  opacity: 0.75;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  transform: translate(150%, -50%);
+  align-items: center;
 
-  .h1 {
-    font-size: 4rem;
-    line-height: 2;
-    margin-bottom: 40px;
-  }
-
-  .h1,
-  .h2 {
-    font-family: 'American Typewriter', monospace;
-    font-weight: 400;
-    color: black;
+  .contentWrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150%;
-    margin: 0;
+    flex-direction: column;
+    .h1 {
+      font-size: 4rem;
+      line-height: 2;
+      margin-bottom: 40px;
+    }
+
+    .h1,
+    .h2 {
+      font-family: 'American Typewriter', monospace;
+      font-weight: 400;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
   }
 }

@@ -75,7 +75,6 @@ export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<TripsResponseBodyPost>> {
   const body = await request.json();
-  console.log(body);
   // zod please verify the body matches my schema
   const result = tripSchema.safeParse(body);
 
@@ -102,7 +101,7 @@ export async function POST(
       { status: 500 },
     );
   }
-
+  console.log(trip);
   return NextResponse.json({
     trip: trip,
   });
