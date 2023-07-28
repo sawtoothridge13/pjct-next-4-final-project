@@ -16,7 +16,7 @@ export default function TripsForm({ trips }: Props) {
   const [onEditNameInput, setOnEditNameInput] = useState('');
 
   async function createTrip() {
-    const response = await fetch(`/api/trips`, {
+    const response = await fetch(`/api/createtrip`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', // Set the correct Content-Type header
