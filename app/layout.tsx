@@ -16,6 +16,11 @@ export default async function RootLayout({ children }: Props) {
   // 1. get the session token from the cookie
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
+  const trips = await getTrips();
+  const options = trips.map((trip) => ({
+    value: trip.id.toString(),
+    label: trip.name,
+  }));
 
   const user = !sessionToken?.value
     ? undefined
@@ -47,19 +52,23 @@ export default async function RootLayout({ children }: Props) {
                     <a href="/contact">Contact</a>
                   </li>
                 </ul>
-                <div className={styles.headerButtonsContainer}>
-                  {user ? (
-                    <>
-                      <div>{user.username}</div>
-                      <LogoutButton />
-                    </>
-                  ) : (
-                    <>
-                      <RegisterButton />
-                      <LoginButton />
-                    </>
-                  )}
+                {user ? (
+                  <>
+                    <div>{user.username}</div>
+                    <LogoutButton />
+                  </>
+                ) : (
+                  <>
+                    <RegisterButton />
+                    <LoginButton />
+                  </>
+                )}
+
+                {/* <div className={styles.headerButtonsContainer}>
+                  <button className={styles.button}>login</button>
+                  <button className={styles.button}>register</button>
                 </div>
+                <LogoutButton /> */}
               </nav>
             </div>
             <div className={styles.divider} />

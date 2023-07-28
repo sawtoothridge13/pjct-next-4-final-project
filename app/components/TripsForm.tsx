@@ -50,10 +50,11 @@ export default function TripsForm({ trips }: Props) {
     });
 
     const data = await response.json();
+    console.log(data);
     setTripList(
       tripList.map((trip) => {
         if (trip.id === data.trip.id) {
-          return data.trip;
+          return data.trip.id;
         }
         return trip;
       }),
@@ -61,73 +62,69 @@ export default function TripsForm({ trips }: Props) {
   }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.inputDiv}>
-        <label>
-          <input
-            className={styles.input}
-            value={nameInput}
-            onChange={(event) => setNameInput(event.currentTarget.value)}
-          />
-          Name
-        </label>
-        <br />
-        <button
-          className={styles.button}
-          onClick={async () => await createTrip()}
-        >
-          create +
-        </button>
+    <div className={styles.inputDiv}>
+      <label>
+        <input
+          value={nameInput}
+          onChange={(event) => setNameInput(event.currentTarget.value)}
+        />
+        Name
+      </label>
+      <br />
+      <button
+        className={styles.button}
+        onClick={async () => await createTrip()}
+      >
+        create +
+      </button>
 
-        {tripList.map((trip) => {
-          return (
-            <div key={`trip-inputs-${trip.id}`} className={styles.inputDiv}>
-              <br />
-              <label>
-                <input
-                  className={styles.input}
-                  value={trip.id !== onEditId ? trip.name : onEditNameInput}
-                  onChange={(event) =>
-                    setOnEditNameInput(event.currentTarget.value)
-                  }
-                  disabled={trip.id !== onEditId}
-                />
-                Name
-              </label>
+      {tripList.map((trip) => {
+        return (
+          <div key={`trip-inputs-${trip.id}`} className={styles.inputDiv}>
+            <br />
+            <label>
+              <input
+                value={trip.id !== onEditId ? trip.name : onEditNameInput}
+                onChange={(event) =>
+                  setOnEditNameInput(event.currentTarget.value)
+                }
+                disabled={trip.id !== onEditId}
+              />
+              Name
+            </label>
 
-              <br />
-              {trip.id === onEditId ? (
-                <button
-                  className={styles.button}
-                  onClick={async () => {
-                    setOnEditId(undefined);
-                    await updateTripById(trip.id);
-                  }}
-                >
-                  save
-                </button>
-              ) : (
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    setOnEditId(trip.id);
-                    setOnEditNameInput(trip.name);
-                  }}
-                >
-                  edit
-                </button>
-              )}
+            <br />
+            {trip.id === onEditId ? (
               <button
                 className={styles.button}
-                onClick={async () => await deleteTripById(trip.id)}
+                onClick={async () => {
+                  setOnEditId(undefined);
+                  await updateTripById(trip.id);
+                }}
               >
-                x
+                save
               </button>
-              <br />
-            </div>
-          );
-        })}
-      </div>
-    </section>
+            ) : (
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setOnEditId(trip.id);
+                  setOnEditNameInput(trip.name);
+                }}
+              >
+                edit
+              </button>
+            )}
+            <button
+              className={styles.button}
+              onClick={async () => await deleteTripById(trip.id)}
+            >
+              x
+            </button>
+            <br />
+          </div>
+        );
+      })}
+    </div>
   );
 }

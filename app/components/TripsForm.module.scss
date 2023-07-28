@@ -1,41 +1,20 @@
-.section {
-  display: flex;
-  flex-direction: column;
-  background-color: #41403ee9;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 50dvh;
-  width: 400px;
-  border-style: solid;
-  border-color: antiquewhite;
-  border-width: 5px;
-  border-radius: 5%;
-  box-shadow: 0 0 20px rgba(244, 243, 243, 0.1);
-  contain: content;
+.button {
+  border: 1px solid;
+  cursor: pointer;
+  background-color: white;
+  color: rgb(0, 31, 57);
+  border-radius: 5px;
 
-  .inputDiv {
-    margin-right: 5px;
-    .input {
-      background-color: antiquewhite;
-      margin: 10px;
-      border-radius: 5px;
-      border-style: solid;
-      border-color: rgb(0, 0, 0);
-    }
-    .button {
-      border: 1px solid;
-      cursor: pointer;
-      background-color: white;
-      color: rgb(0, 31, 57);
-      border-radius: 5px;
-      margin-left: 10px;
-      float: left;
+  &:hover {
+    background-color: rgb(0, 31, 57);
+    color: white;
+  }
+}
 
-      &:hover {
-        background-color: rgb(0, 31, 57);
-        color: white;
-      }
-    }
+.inputDiv {
+  input {
+    background-color: rgb(248, 54, 112);
+    border-radius: 5px;
+    border: none;
   }
 }
