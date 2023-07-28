@@ -38,7 +38,7 @@ export default function TripsForm({ trips }: Props) {
 
     const data = await response.json();
     console.log(data);
-    setTripList(tripList.filter((trip) => trip.id !== id));
+    setTripList(tripList.filter((trip) => trip.id !== data.trip.id));
   }
 
   async function updateTripById(id: number) {
@@ -53,9 +53,8 @@ export default function TripsForm({ trips }: Props) {
     setTripList(
       tripList.map((trip) => {
         if (trip.id === data.trip.id) {
-          return data.trip.id;
+          return data.trip;
         }
-        console.log(trip);
         return trip;
       }),
     );

@@ -1,4 +1,4 @@
-import { createTrip, getTrips } from '../../../database/trips';
+import { getTrips } from '../../../database/trips';
 import TripsForm from '../../components/TripsForm';
 import styles from './Trips.module.scss';
 
