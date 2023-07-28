@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { getTrips } from '../../../../database/trips';
-import { getUserByUsername } from '../../../../database/users';
-import TripsForm from '../../../components/TripsForm';
+import { getTrips } from '../../../database/trips';
+import { getUserByUsername } from '../../../database/users';
+import TripsForm from '../../components/TripsForm';
 // import { getValidSessionByToken } from '../../../../database/sessions';
 import styles from './page.module.scss';
 

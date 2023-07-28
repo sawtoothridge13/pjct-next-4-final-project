@@ -16,11 +16,8 @@ export default function TripsForm({ trips }: Props) {
   const [onEditNameInput, setOnEditNameInput] = useState('');
 
   async function createTrip() {
-    const response = await fetch(`/api/createtrip`, {
+    const response = await fetch('/api/trips', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', // Set the correct Content-Type header
-      },
       body: JSON.stringify({
         name: nameInput,
       }),
@@ -50,81 +47,85 @@ export default function TripsForm({ trips }: Props) {
     });
 
     const data = await response.json();
-    console.log(data);
     setTripList(
       tripList.map((trip) => {
         if (trip.id === data.trip.id) {
-          return data.trip.id;
+          return data.trip;
         }
+        console.log(trip);
         return trip;
       }),
     );
   }
 
   return (
-    <div className={styles.inputDiv}>
-      <label>
-        <input
-          value={nameInput}
-          onChange={(event) => setNameInput(event.currentTarget.value)}
-        />
-        Name
-      </label>
-      <br />
-      <button
-        className={styles.button}
-        onClick={async () => await createTrip()}
-      >
-        create +
-      </button>
+    <section className={styles.section}>
+      <div className={styles.inputDiv}>
+        <label>
+          <input
+            className={styles.input}
+            value={nameInput}
+            onChange={(event) => setNameInput(event.currentTarget.value)}
+          />
+          Name
+        </label>
+        <br />
+        <button
+          className={styles.button}
+          onClick={async () => await createTrip()}
+        >
+          create +
+        </button>
 
-      {tripList.map((trip) => {
-        return (
-          <div key={`trip-inputs-${trip.id}`} className={styles.inputDiv}>
-            <br />
-            <label>
-              <input
-                value={trip.id !== onEditId ? trip.name : onEditNameInput}
-                onChange={(event) =>
-                  setOnEditNameInput(event.currentTarget.value)
-                }
-                disabled={trip.id !== onEditId}
-              />
-              Name
-            </label>
+        {tripList.map((trip) => {
+          return (
+            <div key={`trip-inputs-${trip.id}`} className={styles.inputDiv}>
+              <br />
+              <label>
+                <input
+                  className={styles.input}
+                  value={trip.id !== onEditId ? trip.name : onEditNameInput}
+                  onChange={(event) =>
+                    setOnEditNameInput(event.currentTarget.value)
+                  }
+                  disabled={trip.id !== onEditId}
+                />
+                Name
+              </label>
 
-            <br />
-            {trip.id === onEditId ? (
+              <br />
+              {trip.id === onEditId ? (
+                <button
+                  className={styles.button}
+                  onClick={async () => {
+                    setOnEditId(undefined);
+                    await updateTripById(trip.id);
+                  }}
+                >
+                  save
+                </button>
+              ) : (
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setOnEditId(trip.id);
+                    setOnEditNameInput(trip.name);
+                  }}
+                >
+                  edit
+                </button>
+              )}
               <button
                 className={styles.button}
-                onClick={async () => {
-                  setOnEditId(undefined);
-                  await updateTripById(trip.id);
-                }}
+                onClick={async () => await deleteTripById(trip.id)}
               >
-                save
+                x
               </button>
-            ) : (
-              <button
-                className={styles.button}
-                onClick={() => {
-                  setOnEditId(trip.id);
-                  setOnEditNameInput(trip.name);
-                }}
-              >
-                edit
-              </button>
-            )}
-            <button
-              className={styles.button}
-              onClick={async () => await deleteTripById(trip.id)}
-            >
-              x
-            </button>
-            <br />
-          </div>
-        );
-      })}
-    </div>
+              <br />
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }

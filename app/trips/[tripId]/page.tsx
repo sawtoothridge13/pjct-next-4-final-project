@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getJournalById } from '../../../../database/journals';
-import { getMapById } from '../../../../database/maps';
-import { getMediaFileById } from '../../../../database/mediaFiles';
-import { getTripById, getTrips } from '../../../../database/trips';
-import DropDownMenu from '../../../components/DropDownMenu';
-import JournalEntryForm from '../../../components/JournalEntryForm';
-import MapBoxComponent from '../../../components/MapBoxComponent';
-import MapComponent from '../../../components/MapComponent';
-import TripsForm from '../../../components/TripsForm';
+import { getJournalById } from '../../../database/journals';
+import { getMapById } from '../../../database/maps';
+import { getMediaFileById } from '../../../database/mediaFiles';
+import { getTripById, getTrips } from '../../../database/trips';
+import DropDownMenu from '../../components/DropDownMenu';
+import JournalEntryForm from '../../components/JournalEntryForm';
+import MapBoxComponent from '../../components/MapBoxComponent';
+import MapComponent from '../../components/MapComponent';
+import TripsForm from '../../components/TripsForm';
 import styles from './TripStyles.module.scss';
 
 export const metadata = {

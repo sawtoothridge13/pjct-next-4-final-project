@@ -22,7 +22,6 @@ export async function GET(
 ): Promise<NextResponse<TripResponseBodyGet>> {
   const tripId = Number(params.tripId);
   if (!tripId) {
-    console.log(tripId);
     return NextResponse.json(
       {
         error: 'Trip id is not valid',

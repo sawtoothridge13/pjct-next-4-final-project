@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 // import { getAnimals } from '../../database/animals';
-import { getValidSessionByToken } from '../../../database/sessions';
+import { getValidSessionByToken } from '../../database/sessions';
 
 type Props = {
   children: React.ReactNode;

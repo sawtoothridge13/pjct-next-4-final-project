@@ -1,12 +1,12 @@
 import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getValidSessionByToken } from '../../../../database/sessions';
+import { getValidSessionByToken } from '../../database/sessions';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default async function ProfileLayout(props: Props) {
+export default async function TripsLayout(props: Props) {
   const headersList = headers();
 
   // 1. Check if the sessionToken cookie exit

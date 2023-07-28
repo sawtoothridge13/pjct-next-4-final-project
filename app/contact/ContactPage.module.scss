@@ -1,7 +1,7 @@
 .heroArea {
   min-height: 600px;
   position: relative;
-  background-image: url('../../../public/images/suitcases.jpeg');
+  background-image: url('../../public/images/suitcases.jpeg');
   background-position: center right;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,7 +9,7 @@
 }
 
 .contentWrapper {
-  height: 440px;
+  height: 100px;
   width: 400px;
   padding: 20px;
   border-style: solid;
@@ -30,13 +30,11 @@
 
 .main {
   font-family: 'American Typewriter', monospace;
-  line-height: 1.5;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 20px;
-
   .h1 {
     font-size: 24px;
     margin-bottom: 10px;
