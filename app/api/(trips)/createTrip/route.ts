@@ -1,16 +1,13 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getValidSessionByToken } from '../../../database/sessions';
-import {
-  createTrip,
-  getTripsWithLimitAndOffsetBySessionToken,
-} from '../../../database/trips';
+import { getValidSessionByToken } from '../../../../database/sessions';
+import { createTrip, getTripsBySessionToken } from '../../../../database/trips';
 
 export type Trip = {
-  id: number;
+  id?: number;
   name: string;
-  userId: number;
+  userId?: number;
 };
 
 export type Error = {
@@ -22,14 +19,10 @@ type TripsResponseBodyPost = { trip: Trip } | Error;
 
 const tripSchema = z.object({
   name: z.string(),
-  userId: z.number(),
+  // userId: z.number(),
 });
 
-export async function GET(
-  request: NextRequest,
-): Promise<NextResponse<TripsResponseBodyGet>> {
-  const { searchParams } = new URL(request.url);
-
+export async function GET(): Promise<NextResponse<TripsResponseBodyGet>> {
   // 1. get the token from the cookie
   const sessionTokenCookie = cookies().get('sessionToken');
 
@@ -37,8 +30,6 @@ export async function GET(
   const session =
     sessionTokenCookie &&
     (await getValidSessionByToken(sessionTokenCookie.value));
-
-  console.log('This comes from the API', session);
 
   if (!session) {
     return NextResponse.json(
@@ -48,27 +39,10 @@ export async function GET(
       { status: 401 },
     );
   }
-
-  const limit = Number(searchParams.get('limit'));
-  const offset = Number(searchParams.get('offset'));
-
-  if (!limit || !offset) {
-    return NextResponse.json(
-      {
-        error: 'Limit and Offset need to be passed as params',
-      },
-      { status: 400 },
-    );
-  }
-
   // query the database to get all the trips only if a valid session token is passed
-  const trips = await getTripsWithLimitAndOffsetBySessionToken(
-    limit,
-    offset,
-    sessionTokenCookie.value,
-  );
+  const trips = await getTripsBySessionToken(sessionTokenCookie.value);
 
-  return NextResponse.json({ trips: trips });
+  return NextResponse.json({ trips });
 }
 
 export async function POST(
@@ -89,8 +63,26 @@ export async function POST(
       { status: 400 },
     );
   }
-  // query the database to get all the trips
-  const trip = await createTrip(result.data.name, result.data.userId);
+
+  // Get the userId from the session object
+  const sessionTokenCookie = cookies().get('sessionToken');
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'session token is not valid',
+      },
+      { status: 401 },
+    );
+  }
+
+  const userId = session.id;
+
+  // query the database to create the new trip associated with the logged-in user
+  const trip = await createTrip(result.data.name, userId);
 
   if (!trip) {
     // zod send you details about the error

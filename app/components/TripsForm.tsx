@@ -16,7 +16,7 @@ export default function TripsForm({ trips }: Props) {
   const [onEditNameInput, setOnEditNameInput] = useState('');
 
   async function createTrip() {
-    const response = await fetch('/api/trips', {
+    const response = await fetch('/api/createTrip', {
       method: 'POST',
       body: JSON.stringify({
         name: nameInput,
@@ -24,18 +24,32 @@ export default function TripsForm({ trips }: Props) {
     });
 
     const data = await response.json();
-
+    console.log(data);
     setTripList([...tripList, data.trip]);
   }
 
   async function deleteTripById(id: number) {
-    const response = await fetch(`/api/trips/${id}`, {
-      method: 'DELETE',
-    });
+    try {
+      const response = await fetch(`/api/deleteTrip`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }), // Send the id in the request body
+      });
 
-    const data = await response.json();
-    console.log(data);
-    setTripList(tripList.filter((trip) => trip.id !== data.trip.id));
+      if (!response.ok) {
+        throw new Error('Failed to delete trip');
+      }
+
+      // If the API call is successful, update the tripList state
+      setTripList((prevTripList) =>
+        prevTripList.filter((trip) => trip.id !== id),
+      );
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+      // Handle the error here (e.g., show an error message to the user)
+    }
   }
 
   async function updateTripById(id: number) {

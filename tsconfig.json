@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "eslint-config-upleveled/tsconfig.base.json",
   "compilerOptions": {
+    "target": "es2017",
     "plugins": [
       {
         "name": "next"

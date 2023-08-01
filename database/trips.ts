@@ -1,6 +1,5 @@
 import { cache } from 'react';
 import { Trip } from '../migrations/1687932835-createTripsTable';
-import { Journal } from '../migrations/1687939503-createJournalsTable';
 import { sql } from './connect';
 
 // functions to query database tables
@@ -27,9 +26,8 @@ export const getTripsWithLimitAndOffset = cache(
   },
 );
 
-export const getTripsWithLimitAndOffsetBySessionToken = cache(
-  async (limit: number, offset: number, token: string) => {
-    const trips = await sql<Trip[]>`
+export const getTripsBySessionToken = cache(async (token: string) => {
+  const trips = await sql<Trip[]>`
       SELECT
         trips.*
       FROM
@@ -37,21 +35,18 @@ export const getTripsWithLimitAndOffsetBySessionToken = cache(
       INNER JOIN
         sessions ON (
           sessions.token = ${token} AND
-          sessions.expiry_timestamp > now()
-          -- sessions.user_id = trips.user_id
+          sessions.expiry_timestamp > now() AND
+          sessions.user_id = trips.user_id
         )
-      -- This would JOIN the users table that is related to trips
-      -- INNER JOIN
-      -- users ON (
-      -- users.id = trips.user_id AND
-      -- sessions.user_id = users.id
-      -- )
-      LIMIT ${limit}
-      OFFSET ${offset}
+
+      INNER JOIN
+      users ON (
+      users.id = trips.user_id AND
+      sessions.user_id = users.id
+      )
     `;
-    return trips;
-  },
-);
+  return trips;
+});
 
 export const getTripById = cache(async (id: number) => {
   const [trip] = await sql<Trip[]>`
