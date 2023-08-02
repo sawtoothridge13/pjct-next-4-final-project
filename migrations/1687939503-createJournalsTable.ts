@@ -4,7 +4,7 @@ export type Journal = {
   id: number;
   tripId: number;
   title: string;
-  date: number | null;
+  date: number;
   entry: string;
 };
 

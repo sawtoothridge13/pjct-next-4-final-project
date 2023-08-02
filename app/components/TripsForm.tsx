@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { Trip } from '../../migrations/1687932835-createTripsTable';
+import { useEffect, useState } from 'react';
+import { Trip } from '../../database/trips';
 import styles from './TripsForm.module.scss';
 
 type Props = {
@@ -14,6 +14,14 @@ export default function TripsForm({ trips }: Props) {
 
   // only for on edit inputs
   const [onEditNameInput, setOnEditNameInput] = useState('');
+
+  useEffect(() => {
+    // Your component update code here (if needed)
+    // For example, you can log the updated state:
+    console.log('Updated tripList:', tripList);
+    console.log('Updated onEditId:', onEditId);
+    console.log('Updated onEditNameInput:', onEditNameInput);
+  }, [tripList, onEditId, onEditNameInput]);
 
   async function createTrip() {
     const response = await fetch('/api/createTrip', {
@@ -53,23 +61,38 @@ export default function TripsForm({ trips }: Props) {
   }
 
   async function updateTripById(id: number) {
-    const response = await fetch(`/api/trips/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        name: onEditNameInput,
-      }),
-    });
+    try {
+      const response = await fetch(`/api/updateTrip`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: onEditNameInput,
+          id,
+        }),
+      });
 
-    const data = await response.json();
-    setTripList(
-      tripList.map((trip) => {
-        if (trip.id === data.trip.id) {
-          return data.trip;
-        }
-        console.log(trip);
-        return trip;
-      }),
-    );
+      if (!response.ok) {
+        throw new Error('Failed to update trip');
+      }
+
+      const data = await response.json();
+
+      // Ensure that the data object contains the trip information
+      if (!data.trip) {
+        throw new Error('Invalid response data: trip information not found');
+      }
+
+      setTripList((prevTripList) =>
+        prevTripList.map((trip) => {
+          if (trip.id === data.trip.id) {
+            return data.trip;
+          }
+          return trip;
+        }),
+      );
+    } catch (error) {
+      console.error('Error updating trip:', error);
+      // Handle the error here (e.g., show an error message to the user)
+    }
   }
 
   return (
@@ -113,7 +136,7 @@ export default function TripsForm({ trips }: Props) {
                   className={styles.button}
                   onClick={async () => {
                     setOnEditId(undefined);
-                    await updateTripById(trip.id);
+                    await updateTripById(Number(trip.id));
                   }}
                 >
                   save
@@ -131,7 +154,7 @@ export default function TripsForm({ trips }: Props) {
               )}
               <button
                 className={styles.button}
-                onClick={async () => await deleteTripById(trip.id)}
+                onClick={async () => await deleteTripById(Number(trip.id))}
               >
                 x
               </button>

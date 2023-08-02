@@ -1,11 +1,14 @@
 import { cache } from 'react';
-import { Trip } from '../migrations/1687932835-createTripsTable';
 import { sql } from './connect';
 
 // functions to query database tables
-
+export type Trip = {
+  id?: number;
+  name: string;
+  userId?: number;
+};
 export const getTrips = cache(async () => {
-  const trips = await sql<Trip[]>`
+  const trips = await sql<{ id: number; name: string; userId: number }[]>`
     SELECT * FROM trips
  `;
   return trips;
@@ -13,7 +16,7 @@ export const getTrips = cache(async () => {
 
 export const getTripsWithLimitAndOffset = cache(
   async (limit: number, offset: number) => {
-    const trips = await sql<Trip[]>`
+    const trips = await sql<{ id: number; name: string; userId: number }[]>`
       SELECT
         *
       FROM
@@ -27,7 +30,7 @@ export const getTripsWithLimitAndOffset = cache(
 );
 
 export const getTripsBySessionToken = cache(async (token: string) => {
-  const trips = await sql<Trip[]>`
+  const trips = await sql<{ id: number; name: string; userId: number }[]>`
       SELECT
         trips.*
       FROM
@@ -49,7 +52,7 @@ export const getTripsBySessionToken = cache(async (token: string) => {
 });
 
 export const getTripById = cache(async (id: number) => {
-  const [trip] = await sql<Trip[]>`
+  const [trip] = await sql<{ id: number; name: string; userId: number }[]>`
     SELECT
       *
     FROM
@@ -62,7 +65,7 @@ export const getTripById = cache(async (id: number) => {
 });
 
 export const createTrip = cache(async (name: string, userId: number) => {
-  const [trip] = await sql<Trip[]>`
+  const [trip] = await sql<{ id: number; name: string; userId: number }[]>`
       INSERT INTO trips
         (name, user_id)
       VALUES
@@ -73,24 +76,21 @@ export const createTrip = cache(async (name: string, userId: number) => {
   return trip;
 });
 
-export const updateTripById = cache(
-  async (id: number, name: string, userId: number) => {
-    const [trip] = await sql<Trip[]>`
+export const updateTripById = cache(async (id: number, name: string) => {
+  const [trip] = await sql<{ id: number; name: string; userId: number }[]>`
       UPDATE trips
       SET
-        name = ${name},
-        user_id = ${userId}
+        name = ${name}
       WHERE
         id = ${id}
         RETURNING *
     `;
 
-    return trip;
-  },
-);
+  return trip;
+});
 
 export const deleteTripById = cache(async (id: number) => {
-  const [trip] = await sql<Trip[]>`
+  const [trip] = await sql<{ id: number; name: string; userId: number }[]>`
     DELETE FROM
       trips
     WHERE

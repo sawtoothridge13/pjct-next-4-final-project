@@ -1,9 +1,9 @@
 import { Sql } from 'postgres';
 
 export type Trip = {
-  id: number;
+  id?: number;
   name: string;
-  userId: number;
+  userId?: number;
 };
 
 export async function up(sql: Sql) {
