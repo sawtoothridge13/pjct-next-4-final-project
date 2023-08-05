@@ -12,7 +12,7 @@ export default async function TripsPage() {
 
   return (
     <main className={styles.main}>
-      <div>
+      <div className={styles.div}>
         <TripsForm trips={trips} />
       </div>
     </main>

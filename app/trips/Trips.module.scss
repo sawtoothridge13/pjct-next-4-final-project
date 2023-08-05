@@ -11,25 +11,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  contain: content;
 
-  .contentWrapper {
-    display: flex;
-    flex-direction: column;
-    .h1 {
-      font-size: 4rem;
-      line-height: 2;
-      margin-bottom: 40px;
-    }
+  // .contentWrapper {
+  //   display: flex;
+  //   flex-direction: column;
+  //   .h1 {
+  //     font-size: 4rem;
+  //     line-height: 2;
+  //     margin-bottom: 40px;
+  //   }
 
-    .h1,
-    .h2 {
-      font-family: 'American Typewriter', monospace;
-      font-weight: 400;
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-    }
-  }
+  //   .h1,
+  //   .h2 {
+  //     font-family: 'American Typewriter', monospace;
+  //     font-weight: 400;
+  //     color: #f7f6f6;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     margin: 0;
+  //   }
+  // }
 }

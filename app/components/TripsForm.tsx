@@ -98,7 +98,7 @@ export default function TripsForm({ trips }: Props) {
   return (
     <section className={styles.section}>
       <div className={styles.inputDiv}>
-        <label>
+        <label className={styles.label}>
           <input
             className={styles.input}
             value={nameInput}
@@ -118,7 +118,7 @@ export default function TripsForm({ trips }: Props) {
           return (
             <div key={`trip-inputs-${trip.id}`} className={styles.inputDiv}>
               <br />
-              <label>
+              <label className={styles.label}>
                 <input
                   className={styles.input}
                   value={trip.id !== onEditId ? trip.name : onEditNameInput}

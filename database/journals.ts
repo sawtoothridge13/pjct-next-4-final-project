@@ -12,19 +12,17 @@ export const getJournals = cache(async () => {
   return journals;
 });
 
-export const createJournal = cache(
-  async (tripId: number, title: string, date: number, entry: string) => {
-    const [journal] = await sql<Journal[]>`
+export const createJournal = cache(async (entry: string) => {
+  const [journal] = await sql<Journal[]>`
       INSERT INTO journals
-        (trip_id, title, date, entry)
+        ( entry)
       VALUES
-        (${tripId}, ${title}, ${date}, ${entry})
+        ( ${entry})
       RETURNING *
     `;
 
-    return journal;
-  },
-);
+  return journal;
+});
 
 export const getJournalById = cache(async (id: number) => {
   const [journal] = await sql<Journal[]>`
@@ -38,36 +36,24 @@ export const getJournalById = cache(async (id: number) => {
   return journal;
 });
 
-export const updateJournalById = cache(
-  async (
-    id: number,
-    tripId: number,
-    title: string,
-    date: number,
-    entry: string,
-  ) => {
-    const [journal] = await sql<Journal[]>`
+export const updateJournalById = cache(async (id: number, entry: string) => {
+  const [journal] = await sql<Journal[]>`
       UPDATE journals
       SET
-        trip_id = ${tripId},
-        title = ${title},
-        date = ${date},
         entry = ${entry}
       WHERE
         id = ${id}
         RETURNING *
     `;
 
-    return journal;
-  },
-);
+  return journal;
+});
 
 export const updateJournalEntryById = cache(
-  async (id: number, tripId: number, entry: string) => {
+  async (id: number, entry: string) => {
     const [journal] = await sql<Journal[]>`
       UPDATE journals
-      SET
-        trip_id = ${tripId},
+        SET
         entry = ${entry}
       WHERE
         id = ${id}
@@ -77,3 +63,27 @@ export const updateJournalEntryById = cache(
     return journal;
   },
 );
+
+export const getJournalsBySessionToken = cache(async (token: string) => {
+  const journals = await sql<
+    { id: number; tripId: number; title: string; date: number; entry: string }[]
+  >`
+      SELECT
+        journals.*
+      FROM
+        journals
+      INNER JOIN
+        sessions ON (
+          sessions.token = ${token} AND
+          sessions.expiry_timestamp > now() AND
+          sessions.user_id = journals.trip_id
+        )
+
+      INNER JOIN
+      users ON (
+      users.id = journals.trip_id AND
+      sessions.user_id = users.id
+      )
+    `;
+  return journals;
+});

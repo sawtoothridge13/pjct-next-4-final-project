@@ -57,7 +57,6 @@ export default async function TripPage({ params }: Props) {
           <div className={styles.journalContainer}>
             <form className={styles.form}>
               <h2 className={styles.journalTitle}>{singleJournal.title}</h2>
-
               <textarea
                 className={styles.textarea}
                 defaultValue={singleJournal.entry}

@@ -13,23 +13,29 @@
   align-items: center;
 
   .contentWrapper {
+    font-family: 'American Typewriter', monospace;
+    line-height: 1.5;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: justify;
+    padding: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.751);
+    border-radius: 8px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 20);
+    background-color: rgba(250, 235, 215, 0.905);
+
     .h1 {
-      font-size: 4rem;
-      line-height: 2;
-      margin-bottom: 40px;
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
-    .h1,
     .h2 {
-      font-family: 'American Typewriter', monospace;
-      font-weight: 400;
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
+      font-size: 2rem;
+      margin: 0 auto;
+      max-width: 800px;
     }
   }
 }
