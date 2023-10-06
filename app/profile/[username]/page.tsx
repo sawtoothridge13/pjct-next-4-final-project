@@ -19,10 +19,10 @@ export default async function ProfileUsernamePage({ params }: Props) {
   const user = await getUserByUsername(params.username);
   const trips = await getTrips();
 
-  // if (!user) {
-  //   notFound();
-  // }
-  // redirect('/trips/1');
+  if (!user) {
+    notFound();
+  }
+  redirect('/trips/1');
   return (
     <main className={styles.main}>
       <div>
