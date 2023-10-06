@@ -1,11 +1,17 @@
 import { cache } from 'react';
-import { Journal } from '../migrations/1687939503-createJournalsTable';
 import { sql } from './connect';
 
-// functions to query database tables
-
+export type Journal = {
+  id: number;
+  tripId: number;
+  title: string;
+  date: number | null;
+  entry: string;
+};
 export const getJournals = cache(async () => {
-  const journals = await sql<Journal[]>`
+  const journals = await sql<
+    { id: number; tripId: number; title: string; date: number; entry: string }[]
+  >`
     SELECT * FROM journals
  `;
 
@@ -13,7 +19,9 @@ export const getJournals = cache(async () => {
 });
 
 export const createJournal = cache(async (entry: string) => {
-  const [journal] = await sql<Journal[]>`
+  const [journal] = await sql<
+    { id: number; tripId: number; title: string; date: number; entry: string }[]
+  >`
       INSERT INTO journals
         ( entry)
       VALUES
@@ -25,7 +33,9 @@ export const createJournal = cache(async (entry: string) => {
 });
 
 export const getJournalById = cache(async (id: number) => {
-  const [journal] = await sql<Journal[]>`
+  const [journal] = await sql<
+    { id: number; tripId: number; title: string; date: number; entry: string }[]
+  >`
     SELECT
       *
     FROM
@@ -33,11 +43,14 @@ export const getJournalById = cache(async (id: number) => {
     WHERE
       id = ${id}
   `;
+  console.log(journal);
   return journal;
 });
 
 export const updateJournalById = cache(async (id: number, entry: string) => {
-  const [journal] = await sql<Journal[]>`
+  const [journal] = await sql<
+    { id: number; tripId: number; title: string; date: number; entry: string }[]
+  >`
       UPDATE journals
       SET
         entry = ${entry}
@@ -51,7 +64,15 @@ export const updateJournalById = cache(async (id: number, entry: string) => {
 
 export const updateJournalEntryById = cache(
   async (id: number, entry: string) => {
-    const [journal] = await sql<Journal[]>`
+    const [journal] = await sql<
+      {
+        id: number;
+        tripId: number;
+        title: string;
+        date: number;
+        entry: string;
+      }[]
+    >`
       UPDATE journals
         SET
         entry = ${entry}

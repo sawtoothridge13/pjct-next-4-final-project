@@ -12,6 +12,7 @@
     align-items: flex-end;
     flex-wrap: wrap;
     width: 65%;
+
     .nav {
       font-family: 'American Typewriter', monospace;
       font-size: 1.5rem;
@@ -23,13 +24,15 @@
       width: 100%;
       max-width: 1000px;
       gap: 40px;
+
       .figure {
         display: flex;
-        justify-content: left;
+        justify-content: flex-start;
         align-items: center;
         flex-wrap: wrap;
         width: 60%;
       }
+
       .ul {
         text-decoration: underline;
         list-style: none;
@@ -92,6 +95,77 @@
       }
     }
   }
+
+  // Media Query for Tablets
+  @media (max-width: 768px) {
+    padding-top: 8px;
+
+    .contentWrapper {
+      width: 80%;
+    }
+
+    .nav {
+      font-size: 1.2rem;
+      gap: 20px;
+      justify-content: center;
+
+      .figure {
+        width: 80%;
+      }
+
+      .ul {
+        gap: 10px;
+
+        .li {
+          padding: 16px 0;
+        }
+      }
+
+      .headerButtonsContainer {
+        gap: 8px;
+
+        .button {
+          font-size: 0.6rem;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+
+  // Media Query for Phones
+  @media (max-width: 480px) {
+    padding-top: 4px;
+    justify-content: center;
+    .contentWrapper {
+      width: 100%;
+    }
+
+    .nav {
+      font-size: 1rem;
+      gap: 10px;
+
+      .figure {
+        width: 100%;
+      }
+
+      .ul {
+        gap: 10px;
+        align-items: center;
+        .li {
+          padding: 12px 0;
+        }
+      }
+
+      .headerButtonsContainer {
+        gap: 4px;
+
+        .button {
+          font-size: 0.5rem;
+          line-height: 15px;
+        }
+      }
+    }
+  }
 }
 
 .divider {
@@ -127,6 +201,7 @@
         font-style: normal;
         color: #04061f;
         margin-bottom: 50px;
+
         p {
           margin: 0;
         }
@@ -137,9 +212,24 @@
       font-size: 1rem;
       font-style: normal;
       color: #04061f;
+
       p {
         margin: 0;
       }
+    }
+  }
+
+  // Media Query for Tablets
+  @media (max-width: 768px) {
+    .contentWrapper {
+      width: 80%;
+    }
+  }
+
+  // Media Query for Phones
+  @media (max-width: 480px) {
+    .contentWrapper {
+      width: 100%;
     }
   }
 }

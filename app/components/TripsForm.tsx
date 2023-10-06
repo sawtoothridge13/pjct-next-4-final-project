@@ -34,6 +34,7 @@ export default function TripsForm({ trips }: Props) {
     const data = await response.json();
     console.log(data);
     setTripList([...tripList, data.trip]);
+    setNameInput('');
   }
 
   async function deleteTripById(id: number) {
@@ -102,6 +103,7 @@ export default function TripsForm({ trips }: Props) {
           <input
             className={styles.input}
             value={nameInput}
+            placeholder="new trip name"
             onChange={(event) => setNameInput(event.currentTarget.value)}
           />
           Name

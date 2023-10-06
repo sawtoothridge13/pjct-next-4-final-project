@@ -1,11 +1,5 @@
 import { Sql } from 'postgres';
 
-export type Trip = {
-  id?: number;
-  name: string;
-  userId?: number;
-};
-
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE trips (

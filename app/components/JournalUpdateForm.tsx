@@ -31,7 +31,7 @@ export default async function updateJournalEntry({ params }: Props) {
     // when using Server Actions we don't need prevent the default of the form
     <form>
       <textarea
-        className={style.textArea}
+        className={style.textarea}
         value={params.entry}
         onChange={handleChange}
       />

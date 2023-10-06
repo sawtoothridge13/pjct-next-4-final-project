@@ -26,20 +26,24 @@ export default async function RootLayout({ children }: Props) {
       <body>
         <main>
           <header className={styles.header}>
+            <figure className={styles.figure}>
+              <Image
+                priority={true}
+                src={tTlogo}
+                alt="trip tracker logo"
+                width={170}
+                height={114}
+              />
+            </figure>
             <div className={styles.contentWrapper}>
               <nav className={styles.nav}>
-                <figure>
-                  <Image
-                    priority={true}
-                    src={tTlogo}
-                    alt="trip tracker logo"
-                    width={170}
-                    height={114}
-                  />
-                </figure>
-                {user ? <a href="/trips/1">Dashboard</a> : <a href="/">Home</a>}
-
                 <ul className={styles.ul}>
+                  {user ? (
+                    <a href="/trips/1">Dashboard</a>
+                  ) : (
+                    <a href="/">Home</a>
+                  )}
+
                   <li>
                     <a href="/about">About</a>
                   </li>
